@@ -1,0 +1,400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Amo_CastleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="Int32" Nullable="false" />
+    <Property Name="CountryID" Type="Int32" />
+    <Property Name="CityID" Type="Int32" />
+    <Property Name="StreetID" Type="Int32" />
+    <Property Name="HouseNum" Type="Int32" />
+    <Property Name="Building" Type="Int32" />
+    <Property Name="Entrance" Type="Int32" />
+    <Property Name="Flat" Type="Int32" />
+    <NavigationProperty Name="City" Relationship="Self.FK__Address__CityID__2E1BDC42" FromRole="Address" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="Self.FK__Address__Country__2D27B809" FromRole="Address" ToRole="Country" />
+    <NavigationProperty Name="Street" Relationship="Self.FK__Address__StreetI__2F10007B" FromRole="Address" ToRole="Street" />
+    <NavigationProperty Name="Suppliers" Relationship="Self.FK__Suppliers__Addre__35BCFE0A" FromRole="Address" ToRole="Suppliers" />
+    <NavigationProperty Name="Warehouse" Relationship="Self.FK__Warehouse__Adres__3B75D760" FromRole="Address" ToRole="Warehouse" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Product_Categories" FromRole="Categories" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="Int32" Nullable="false" />
+    <Property Name="City1" Type="String" MaxLength="26" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Address" Relationship="Self.FK__Address__CityID__2E1BDC42" FromRole="City" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <Property Name="Country1" Type="String" MaxLength="26" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Address" Relationship="Self.FK__Address__Country__2D27B809" FromRole="Country" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="SuppliersID" Type="Int32" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ExpectedDelivery" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Suppliers" Relationship="Self.FK__Orders__Supplier__4316F928" FromRole="Orders" ToRole="Suppliers" />
+  </EntityType>
+  <EntityType Name="Photos">
+    <Key>
+      <PropertyRef Name="PhotoID" />
+    </Key>
+    <Property Name="PhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EntityType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EntityID" Type="Int32" Nullable="false" />
+    <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Product_Photos" FromRole="Photos" ToRole="Product" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_Photos" FromRole="Photos" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="SuppliersID" Type="Int32" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="PhotoID" Type="Int32" />
+    <NavigationProperty Name="Categories" Relationship="Self.FK_Product_Categories" FromRole="Product" ToRole="Categories" />
+    <NavigationProperty Name="Photos" Relationship="Self.FK_Product_Photos" FromRole="Product" ToRole="Photos" />
+    <NavigationProperty Name="Suppliers" Relationship="Self.FK_Product_Suppliers" FromRole="Product" ToRole="Suppliers" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK__User__RoleID__38996AB5" FromRole="Roles" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Street">
+    <Key>
+      <PropertyRef Name="StreetID" />
+    </Key>
+    <Property Name="StreetID" Type="Int32" Nullable="false" />
+    <Property Name="Street1" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Address" Relationship="Self.FK__Address__StreetI__2F10007B" FromRole="Street" ToRole="Address" />
+  </EntityType>
+  <EntityType Name="Suppliers">
+    <Key>
+      <PropertyRef Name="SuppliersID" />
+    </Key>
+    <Property Name="SuppliersID" Type="Int32" Nullable="false" />
+    <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AddressID" Type="Int32" />
+    <NavigationProperty Name="Address" Relationship="Self.FK__Suppliers__Addre__35BCFE0A" FromRole="Suppliers" ToRole="Address" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Supplier__4316F928" FromRole="Suppliers" ToRole="Orders" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Product_Suppliers" FromRole="Suppliers" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="IdUser" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" />
+    <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="WarehouseID" Type="Int32" />
+    <Property Name="PhotoID" Type="Int32" />
+    <NavigationProperty Name="Photos" Relationship="Self.FK_User_Photos" FromRole="User" ToRole="Photos" />
+    <NavigationProperty Name="Roles" Relationship="Self.FK__User__RoleID__38996AB5" FromRole="User" ToRole="Roles" />
+    <NavigationProperty Name="Warehouse" Relationship="Self.FK__Warehouse__Manag__3C69FB99" FromRole="User" ToRole="Warehouse" />
+  </EntityType>
+  <EntityType Name="Warehouse">
+    <Key>
+      <PropertyRef Name="IdWareHouse" />
+    </Key>
+    <Property Name="IdWareHouse" Type="Int32" Nullable="false" />
+    <Property Name="HouseName" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdressID" Type="Int32" />
+    <Property Name="ManagerID" Type="Int32" />
+    <Property Name="Capacity" Type="Int32" />
+    <NavigationProperty Name="Address" Relationship="Self.FK__Warehouse__Adres__3B75D760" FromRole="Warehouse" ToRole="Address" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Warehouse__Manag__3C69FB99" FromRole="Warehouse" ToRole="User" />
+  </EntityType>
+  <Association Name="FK__Address__CityID__2E1BDC42">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Address__Country__2D27B809">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Address__StreetI__2F10007B">
+    <End Role="Street" Type="Self.Street" Multiplicity="0..1" />
+    <End Role="Address" Type="Self.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Street">
+        <PropertyRef Name="StreetID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="StreetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Suppliers__Addre__35BCFE0A">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="Suppliers">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Warehouse__Adres__3B75D760">
+    <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+    <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="Warehouse">
+        <PropertyRef Name="AdressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Supplier__4316F928">
+    <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suppliers">
+        <PropertyRef Name="SuppliersID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="SuppliersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Photos">
+    <End Role="Photos" Type="Self.Photos" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photos">
+        <PropertyRef Name="PhotoID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="PhotoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Photos">
+    <End Role="Photos" Type="Self.Photos" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photos">
+        <PropertyRef Name="PhotoID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="PhotoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Suppliers">
+    <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suppliers">
+        <PropertyRef Name="SuppliersID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="SuppliersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User__RoleID__38996AB5">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Warehouse__Manag__3C69FB99">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Warehouse">
+        <PropertyRef Name="ManagerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Amo_CastleEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Address" EntityType="Self.Address" />
+    <EntitySet Name="Categories" EntityType="Self.Categories" />
+    <EntitySet Name="City" EntityType="Self.City" />
+    <EntitySet Name="Country" EntityType="Self.Country" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" />
+    <EntitySet Name="Photos" EntityType="Self.Photos" />
+    <EntitySet Name="Product" EntityType="Self.Product" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" />
+    <EntitySet Name="Street" EntityType="Self.Street" />
+    <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="Warehouse" EntityType="Self.Warehouse" />
+    <AssociationSet Name="FK__Address__CityID__2E1BDC42" Association="Self.FK__Address__CityID__2E1BDC42">
+      <End Role="City" EntitySet="City" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Address__Country__2D27B809" Association="Self.FK__Address__Country__2D27B809">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Address__StreetI__2F10007B" Association="Self.FK__Address__StreetI__2F10007B">
+      <End Role="Street" EntitySet="Street" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Suppliers__Addre__35BCFE0A" Association="Self.FK__Suppliers__Addre__35BCFE0A">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Suppliers" EntitySet="Suppliers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Warehouse__Adres__3B75D760" Association="Self.FK__Warehouse__Adres__3B75D760">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="Warehouse" EntitySet="Warehouse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Categories" Association="Self.FK_Product_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Supplier__4316F928" Association="Self.FK__Orders__Supplier__4316F928">
+      <End Role="Suppliers" EntitySet="Suppliers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Photos" Association="Self.FK_Product_Photos">
+      <End Role="Photos" EntitySet="Photos" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Photos" Association="Self.FK_User_Photos">
+      <End Role="Photos" EntitySet="Photos" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Suppliers" Association="Self.FK_Product_Suppliers">
+      <End Role="Suppliers" EntitySet="Suppliers" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User__RoleID__38996AB5" Association="Self.FK__User__RoleID__38996AB5">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Warehouse__Manag__3C69FB99" Association="Self.FK__Warehouse__Manag__3C69FB99">
+      <End Role="User" EntitySet="User" />
+      <End Role="Warehouse" EntitySet="Warehouse" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Amo_CastleModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Amo_CastleModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

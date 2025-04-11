@@ -1,0 +1,40 @@
+﻿<Window x:Class="Castle.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Castle"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="773" Width="576" WindowStartupLocation="CenterScreen" 
+        AllowsTransparency="True" 
+        Background="Transparent"
+        WindowStyle="None"
+        Style="{StaticResource MaterialDesignWindow}"
+         ResizeMode="NoResize">
+    <Border Background="#FFFFFF" CornerRadius="25" MouseLeftButtonDown="Border_MouseDown" BorderThickness="3" 
+            >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="39"/>
+                <RowDefinition Height="110"/>
+                <RowDefinition Height="260"/>
+                <RowDefinition Height="98"/>
+                <RowDefinition Height="111"/>
+                <RowDefinition Height="68"/>
+                <RowDefinition Height="84"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="65"/>
+                <ColumnDefinition Width="445"/>
+                <ColumnDefinition Width="65"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="/Images/image.png.jpeg" Grid.Row="1" Grid.Column="1" Height="90" Width="90" />
+            <Button IsDefault="True" FontFamily="Fonts/#Roboto Bold Italic" Content="Войти" Grid.Column="1" Grid.Row="5" Height="40" VerticalAlignment="Top" Click="Autorization"/>
+            <Label materialDesign:ColorPicker.ColorChanged="Label_ColorChanged" FontFamily="Fonts/#Roboto Bold Italic" Content="Забыли пароль?" Grid.Column="1" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,40,0,0" />
+            <TextBox x:Name="Log" FontFamily="Fonts/#Roboto Bold Italic" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" FontSize="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Логин"   VerticalAlignment="Top" Width="445" Height="40"/>
+            <PasswordBox x:Name="Pas" FontFamily="Fonts/#Roboto Bold Italic" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="3" FontSize="14"  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.Hint="Пароль" VerticalAlignment="Bottom" Width="445" Height="40"/>
+            <Label FontFamily="Fonts/#Roboto Bold Italic" Grid.Column="1" Content="Авторизация" FontSize="34" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center"/>
+        </Grid>
+    </Border>
+</Window>

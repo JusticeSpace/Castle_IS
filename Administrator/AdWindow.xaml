@@ -1,0 +1,63 @@
+﻿<Window x:Class="Castle.Administrator.AdWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Castle.Administrator"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="UserI" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Style="{StaticResource MaterialDesignWindow}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width ="140"/>
+            <ColumnDefinition Width ="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Grid.Column="1" Background="#CAF0F8">
+            <Frame
+        x:Name="MainFrame"
+        NavigationUIVisibility="Hidden"
+        Background="#CAF0F8"/>
+        </Grid>
+        <Grid Grid.Row="1" Background="#E0F7FF">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Castle"
+             FontFamily="Fonts/#Roboto Bold Italic"
+                   Foreground="#00B4D8"
+                   FontSize="30"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center"
+            />
+            <Border Width="100" Height="125" Grid.Column="1" Grid.Row="0" CornerRadius="50" Background="Transparent">
+                <Border.Clip>
+                    <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50" />
+                </Border.Clip>
+                <Image Source="/Images/image.png.jpeg" Height="90" Width="90" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            </Border>
+            <TextBlock Text="Выход"
+ FontFamily="Fonts/#Roboto Bold Italic" Grid.Column="1" Grid.Row="7"
+       Foreground="Black"
+       FontSize="30"
+       VerticalAlignment="Bottom"
+       HorizontalAlignment="Center"
+/>
+            <TextBlock Text="Профиль" Grid.Row="1"
+ FontFamily="Fonts/#Roboto Bold Italic"
+       Foreground="Black"
+       FontSize="30"
+       VerticalAlignment="Bottom"
+       HorizontalAlignment="Center"
+/>
+            <Image Source="/Images/Arrows_Sign out.png" Grid.Row="7" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" MouseDown="Image_MouseDown"/>
+            <Image Source="/Images/Light _ Large _ ico-profile.png" Grid.Row="1" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        </Grid>
+    </Grid>
+</Window>
