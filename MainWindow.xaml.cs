@@ -1,5 +1,4 @@
 ﻿using Castle.Administrator;
-using Castle.Manager;
 using Castle.UserFolder;
 using System.Linq;
 using System.Windows;
@@ -71,7 +70,7 @@ namespace Castle
                     userWindow.Show();
                     break;
                 case 3: // Менеджер
-                    ManagerrWindow managerWindow = new ManagerrWindow();
+                    ManagerWindow managerWindow = new ManagerWindow();
                     managerWindow.Show();
                     break;
                 default:

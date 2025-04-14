@@ -1,11 +1,13 @@
-﻿using Castle.ForEveryone;
+﻿using Castle; // Обновляем пространство имён на Castle
 using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Input; // Добавлено для MouseButtonEventArgs
+using System.Windows.Input;
+using Microsoft.Win32; // Для OpenFileDialog
+using Castle.ForEveryone;
 
 namespace Castle.UserFolder
 {
@@ -29,6 +31,7 @@ namespace Castle.UserFolder
             _context.Product
                 .Include(p => p.Categories)
                 .Include(p => p.Suppliers)
+                .Include(p => p.Photos) // Добавляем загрузку Photos
                 .Load();
 
             _productViewSource = new CollectionViewSource();
@@ -85,16 +88,29 @@ namespace Castle.UserFolder
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            UpdateFilter();
+        }
+
+        private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateFilter();
+        }
+
+        private void UpdateFilter()
+        {
             if (_productViewSource?.View == null || Seek == null) return;
 
             var searchText = Seek.Text?.ToLower() ?? "";
+            var selectedCategory = CategoryComboBox.SelectedItem as Categories;
 
             _productViewSource.View.Filter = item =>
             {
                 if (item is Product product)
                 {
-                    return (product.ProductName != null && product.ProductName.ToLower().Contains(searchText)) ||
-                           product.ProductID.ToString().Contains(searchText);
+                    bool matchesSearch = (product.ProductName != null && product.ProductName.ToLower().Contains(searchText)) ||
+                                         product.ProductID.ToString().Contains(searchText);
+                    bool matchesCategory = selectedCategory == null || product.CategoryID == selectedCategory.CategoryID;
+                    return matchesSearch && matchesCategory;
                 }
                 return false;
             };
@@ -102,7 +118,11 @@ namespace Castle.UserFolder
 
         private void RefreshData()
         {
-            _context.Product.Load();
+            _context.Product
+                .Include(p => p.Categories)
+                .Include(p => p.Suppliers)
+                .Include(p => p.Photos)
+                .Load();
             _productViewSource.Source = _context.Product.Local;
             DGProduct.Items.Refresh();
         }
@@ -115,23 +135,51 @@ namespace Castle.UserFolder
             RefreshData();
         }
 
-        // Добавляем метод для изменения фото
         private void ChangePhoto_Click(object sender, RoutedEventArgs e)
         {
-            // Здесь можно добавить логику изменения фото
-            MessageBox.Show("Логика изменения фото будет добавлена позже.");
+            var product = (sender as Button).DataContext as Product;
+            if (product == null) return;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.png)|*.jpg;*.png|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    byte[] imageBytes = System.IO.File.ReadAllBytes(openFileDialog.FileName);
+
+                    if (product.Photos == null)
+                    {
+                        // Если фото ещё нет, создаём новый объект Photos
+                        var newPhoto = new Photos
+                        {
+                            Photo = imageBytes // Предполагаем, что поле называется ImageData
+                        };
+                        _context.Photos.Add(newPhoto);
+                        product.Photos = newPhoto;
+                        product.PhotoID = newPhoto.PhotoID; // Связываем через PhotoID
+                    }
+                    else
+                    {
+                        // Если фото уже есть, обновляем его
+                        product.Photos.Photo = imageBytes;
+                    }
+
+                    _context.SaveChanges();
+                    RefreshData();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при загрузке фото: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
-        // Добавляем метод для обработки клика мыши на DataGrid
-        private void DGProduct_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-        }
         private void ExportToExcel_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Логика экспорта в Excel будет добавлена позже.");
         }
 
-        // Добавляем метод для обновления данных
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             RefreshData();

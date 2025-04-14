@@ -1,32 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using YourNamespace;
+using Castle.UserFolder;
 
-namespace Castle.Manager
+namespace Castle
 {
-    /// <summary>
-    /// Логика взаимодействия для ManagerrWindow.xaml
-    /// </summary>
-    public partial class ManagerrWindow : Window
+    public partial class ManagerWindow : Window
     {
-        public ManagerrWindow()
+        public ManagerWindow()
         {
             InitializeComponent();
         }
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private void Profile_Click(object sender, RoutedEventArgs e)
         {
-            NavigationHelper.NavigateToMainWindow(this);
+            MainFrame.Navigate(new UProfile());
+        }
+
+        private void Products_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new USuplies());
         }
     }
 }
