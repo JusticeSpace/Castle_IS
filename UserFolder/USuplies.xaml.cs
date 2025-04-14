@@ -99,10 +99,9 @@ namespace Castle.UserFolder
         private void UpdateFilter()
         {
             if (_productViewSource?.View == null || Seek == null) return;
-
             var searchText = Seek.Text?.ToLower() ?? "";
-            var selectedCategory = CategoryComboBox.SelectedItem as Categories;
 
+            var selectedCategory = CategoryComboBox.SelectedItem as Categories;
             _productViewSource.View.Filter = item =>
             {
                 if (item is Product product)
