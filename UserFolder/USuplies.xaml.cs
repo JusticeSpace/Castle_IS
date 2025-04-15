@@ -26,23 +26,31 @@ namespace Castle.UserFolder
         {
             _context = new Amo_CastleEntities1();
 
+            // Загружаем данные из БД
             _context.Categories.Load();
             _context.Suppliers.Load();
             _context.Product
                 .Include(p => p.Categories)
                 .Include(p => p.Suppliers)
-                .Include(p => p.Photos) // Добавляем загрузку Photos
+                .Include(p => p.Photos)
                 .Load();
 
+            // Настраиваем источник данных для DataGrid
             _productViewSource = new CollectionViewSource();
             _productViewSource.Source = _context.Product.Local;
             DGProduct.ItemsSource = _productViewSource.View;
 
+            // Настраиваем CategoriesViewSource для фильтра
             var categoriesViewSource = (CollectionViewSource)FindResource("CategoriesViewSource");
-            categoriesViewSource.Source = _context.Categories.Local;
+            var categoriesList = _context.Categories.Local.ToList();
+            var allCategories = new Categories { CategoryID = -1, CategoryName = "Все товары" };
+            categoriesList.Insert(0, allCategories);
+            categoriesViewSource.Source = categoriesList;
+            CategoryComboBox.SelectedItem = allCategories;
 
-            var suppliersViewSource = (CollectionViewSource)FindResource("SuppliersViewSource");
-            suppliersViewSource.Source = _context.Suppliers.Local;
+            // Настраиваем EditingCategoriesViewSource для редактирования
+            var editingCategoriesViewSource = (CollectionViewSource)FindResource("EditingCategoriesViewSource");
+            editingCategoriesViewSource.Source = _context.Categories.Local; // Устанавливаем реальные категории
         }
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
@@ -83,6 +91,11 @@ namespace Castle.UserFolder
                     MessageBox.Show("Цена не может быть отрицательной!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     e.Cancel = true;
                 }
+                else
+                {
+                    _context.SaveChanges(); // Сохраняем изменения
+                                            // Убрали UpdateFilter, чтобы фильтр не менялся
+                }
             }
         }
 
@@ -99,8 +112,15 @@ namespace Castle.UserFolder
         private void UpdateFilter()
         {
             if (_productViewSource?.View == null || Seek == null) return;
-            var searchText = Seek.Text?.ToLower() ?? "";
 
+            // Приводим View к ListCollectionView
+            var listView = _productViewSource.View as ListCollectionView;
+            if (listView != null && (listView.IsAddingNew || listView.IsEditingItem))
+            {
+                return; // Не обновляем фильтр во время редактирования
+            }
+
+            var searchText = Seek.Text?.ToLower() ?? "";
             var selectedCategory = CategoryComboBox.SelectedItem as Categories;
             _productViewSource.View.Filter = item =>
             {
@@ -108,7 +128,8 @@ namespace Castle.UserFolder
                 {
                     bool matchesSearch = (product.ProductName != null && product.ProductName.ToLower().Contains(searchText)) ||
                                          product.ProductID.ToString().Contains(searchText);
-                    bool matchesCategory = selectedCategory == null || product.CategoryID == selectedCategory.CategoryID;
+                    bool matchesCategory = selectedCategory == null || selectedCategory.CategoryID == -1 ||
+                                          (selectedCategory.CategoryID != -1 && product.CategoryID == selectedCategory.CategoryID);
                     return matchesSearch && matchesCategory;
                 }
                 return false;
@@ -149,18 +170,18 @@ namespace Castle.UserFolder
 
                     if (product.Photos == null)
                     {
-                        // Если фото ещё нет, создаём новый объект Photos
                         var newPhoto = new Photos
                         {
-                            Photo = imageBytes // Предполагаем, что поле называется ImageData
+                            Photo = imageBytes,
+                            EntityType = "Product",
+                            EntityID = product.ProductID
                         };
                         _context.Photos.Add(newPhoto);
                         product.Photos = newPhoto;
-                        product.PhotoID = newPhoto.PhotoID; // Связываем через PhotoID
+                        product.PhotoID = newPhoto.PhotoID;
                     }
                     else
                     {
-                        // Если фото уже есть, обновляем его
                         product.Photos.Photo = imageBytes;
                     }
 

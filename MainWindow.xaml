@@ -40,7 +40,7 @@
 
             <!-- Поля ввода -->
             <StackPanel Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBox x:Name="Log" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                <TextBox x:Name="Login" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                          materialDesign:HintAssist.Hint="Логин" Width="300" Margin="0,0,0,20" FontSize="15"/>
                 <!-- Контейнер для пароля -->
                 <Grid Width="300" Margin="0,0,0,20">
@@ -50,8 +50,8 @@
                     </Grid.ColumnDefinitions>
                     <!-- PasswordBox и TextBox в одной ячейке -->
                     <Grid Grid.Column="0">
-                        <PasswordBox x:Name="Pas" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
-                                     materialDesign:HintAssist.Hint="Пароль" FontSize="15" Visibility="Visible"/>
+                        <PasswordBox x:Name="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
+                                     materialDesign:HintAssist.Hint="Пароль" FontSize="15" Visibility="Visible" KeyDown="Pas_KeyDown"/>
                         <TextBox x:Name="VisiblePas" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                  materialDesign:HintAssist.Hint="Пароль" FontSize="15" Visibility="Collapsed"/>
                     </Grid>
@@ -60,7 +60,8 @@
                         <materialDesign:PackIcon x:Name="PasswordEyeIcon" Kind="Eye" Width="20" Height="20"/>
                     </Button>
                 </Grid>
-                <Button Content="Войти" Click="Autorization" Width="150" Height="40" Margin="0,0,0,10"/>
+                <Button Grid.Row="4" Content="Войти" Click="Autorization" Margin="0,20,0,10" 
+                Style="{StaticResource MaterialDesignRaisedButton}" Width="200" FontSize="16" IsDefault="True"/>
                 <TextBlock Text="Забыли пароль?" Margin="0,10,0,0" HorizontalAlignment="Center" 
                            MouseLeftButtonUp="ForgotPassword_Click"/>
             </StackPanel>

@@ -25,7 +25,6 @@ namespace Castle
     
         public virtual Categories Categories { get; set; }
         public virtual Photos Photos { get; set; }
-        public virtual Suppliers Suppliers { get; set; 
-    }
+        public virtual Suppliers Suppliers { get; set; }
     }
 }

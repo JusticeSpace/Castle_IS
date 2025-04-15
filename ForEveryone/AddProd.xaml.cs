@@ -4,8 +4,7 @@ using System.Data.Entity;
 using Microsoft.Win32;
 using System.Linq;
 using System.Windows.Media.Imaging;
-using System.IO; // Добавлено для использования класса File
-using System.Windows.Input;
+using System.IO;
 
 namespace Castle.ForEveryone
 {
@@ -20,6 +19,7 @@ namespace Castle.ForEveryone
             _context = context;
             _newProduct = new Product();
             DataContext = _newProduct;
+            LoadCategoriesAndSuppliers(); // Загружаем категории и поставщиков
         }
 
         private void LoadCategoriesAndSuppliers()
@@ -37,7 +37,15 @@ namespace Castle.ForEveryone
                 try
                 {
                     byte[] photoData = File.ReadAllBytes(openFileDialog.FileName);
-                    ProductPhoto.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                    _newProduct.Photos = new Photos
+                    {
+                        Photo = photoData,
+                        EntityType = "Product", // Всегда Product для товаров
+                        EntityID = _newProduct.ProductID // Будет установлен после сохранения
+                    };
+                    ProductImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                    ProductImage.Visibility = Visibility.Visible;
+                    ImageStatusText.Visibility = Visibility.Collapsed;
                 }
                 catch (Exception ex)
                 {
@@ -60,9 +68,10 @@ namespace Castle.ForEveryone
                 MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
+            if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
                 DragMove();
         }
 
