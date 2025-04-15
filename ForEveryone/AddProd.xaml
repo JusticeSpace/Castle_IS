@@ -21,34 +21,61 @@
 
             <!-- Название товара -->
             <TextBox Grid.Row="0" materialDesign:HintAssist.Hint="Название товара" 
-                     Text="{Binding ProductName}" Margin="0,10" FontSize="16"/>
+                     Text="{Binding ProductName, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,10" FontSize="16"/>
 
             <!-- Цена -->
-            <TextBox Grid.Row="1" materialDesign:HintAssist.Hint="Цена" 
-                     Text="{Binding Price}" Margin="0,10" FontSize="16"/>
+            <Grid Grid.Row="1" Margin="0,10">
+                <TextBox x:Name="PriceTextBox" 
+                         Text="" 
+                         FontSize="16" 
+                         GotFocus="PriceTextBox_GotFocus" 
+                         LostFocus="PriceTextBox_LostFocus" 
+                         TextChanged="PriceTextBox_TextChanged"/>
+                <TextBlock x:Name="PriceHint" 
+                           Text="Цена" 
+                           FontSize="16" 
+                           Foreground="Gray" 
+                           IsHitTestVisible="False" 
+                           Margin="5,0,0,0" 
+                           Visibility="Visible"/>
+            </Grid>
 
             <!-- Количество -->
-            <TextBox Grid.Row="2" materialDesign:HintAssist.Hint="Количество" 
-                     Text="{Binding Quantity}" Margin="0,10" FontSize="16"/>
+            <Grid Grid.Row="2" Margin="0,10">
+                <TextBox x:Name="QuantityTextBox" 
+                         Text="" 
+                         FontSize="16" 
+                         GotFocus="QuantityTextBox_GotFocus" 
+                         LostFocus="QuantityTextBox_LostFocus" 
+                         TextChanged="QuantityTextBox_TextChanged"/>
+                <TextBlock x:Name="QuantityHint" 
+                           Text="Количество" 
+                           FontSize="16" 
+                           Foreground="Gray" 
+                           IsHitTestVisible="False" 
+                           Margin="5,0,0,0" 
+                           Visibility="Visible"/>
+            </Grid>
 
             <!-- Категория -->
             <ComboBox Grid.Row="3" materialDesign:HintAssist.Hint="Категория" 
                       x:Name="CategoryComboBox" Margin="0,10" FontSize="16"
                       DisplayMemberPath="CategoryName" SelectedValuePath="CategoryID"
-                      SelectedValue="{Binding CategoryID}"/>
+                      SelectedValue="{Binding CategoryID, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Поставщик -->
             <ComboBox Grid.Row="4" materialDesign:HintAssist.Hint="Поставщик" 
                       x:Name="SupplierComboBox" Margin="0,10,0,20" FontSize="16"
                       DisplayMemberPath="SupplierName" SelectedValuePath="SupplierID"
-                      SelectedValue="{Binding SupplierID}"/>
+                      SelectedValue="{Binding SupplierID, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Комментарий -->
             <StackPanel Grid.Row="5" Margin="0,20,0,10">
                 <TextBlock Text="Комментарий" FontSize="14" FontWeight="Bold"/>
                 <TextBox materialDesign:HintAssist.Hint="(необязательно)" 
-                         Text="{Binding Comment}" FontSize="16" 
-                         TextWrapping="Wrap" AcceptsReturn="True" Height="80"/>
+                         Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" 
+                         FontSize="16" TextWrapping="Wrap" AcceptsReturn="True" Height="80"/>
             </StackPanel>
 
             <!-- Фото -->
