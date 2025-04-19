@@ -225,7 +225,7 @@
         <!-- Нижняя панель с дополнительными действиями -->
         <materialDesign:Card Grid.Row="3" Margin="20,10,20,20" Padding="15">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Экспорт в Excel" Click="ExportToExcel_Click"
+                <Button Content="Экспорт в Excel" Click="ExportUsersButton_Click"
                         Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,0,10,0">
                     <Button.ContentTemplate>
                         <DataTemplate>

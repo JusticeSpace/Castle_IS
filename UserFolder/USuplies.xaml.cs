@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.Win32; // Для OpenFileDialog
 using Castle.ForEveryone;
+using ClosedXML.Excel;
 
 namespace Castle.UserFolder
 {
@@ -194,11 +195,53 @@ namespace Castle.UserFolder
             }
         }
 
-        private void ExportToExcel_Click(object sender, RoutedEventArgs e)
+        private void ExportProductsToExcel(string filePath)
         {
-            MessageBox.Show("Логика экспорта в Excel будет добавлена позже.");
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Товары");
+                var products = _context.Product.ToList(); // Получаем список товаров из базы данных
+
+                // Добавляем заголовки
+                worksheet.Cell(1, 1).Value = "ID";
+                worksheet.Cell(1, 2).Value = "Название";
+                worksheet.Cell(1, 3).Value = "Цена";
+                worksheet.Cell(1, 4).Value = "Категория";
+                worksheet.Cell(1, 5).Value = "Поставщик";
+                worksheet.Cell(1, 6).Value = "Фото";
+
+                // Заполняем данными
+                for (int i = 0; i < products.Count; i++)
+                {
+                    worksheet.Cell(i + 2, 1).Value = products[i].ProductID;
+                    worksheet.Cell(i + 2, 2).Value = products[i].ProductName;
+                    worksheet.Cell(i + 2, 3).Value = products[i].Price;
+                    worksheet.Cell(i + 2, 4).Value = products[i].CategoryID;
+                    worksheet.Cell(i + 2, 5).Value = products[i].SuppliersID;
+                    worksheet.Cell(i + 2, 6).Value = products[i].PhotoID;
+                }
+
+                // Сохраняем файл
+                workbook.SaveAs(filePath);
+            }
         }
 
+        private void ExportProductsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var saveFileDialog = new Microsoft.Win32.SaveFileDialog
+            {
+                Filter = "Excel files (*.xlsx)|*.xlsx",
+                DefaultExt = "xlsx",
+                FileName = "supplies.xlsx"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                ExportProductsToExcel(saveFileDialog.FileName);
+                MessageBox.Show("Экспорт товаров завершён!");
+            }
+        }
+            
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             RefreshData();

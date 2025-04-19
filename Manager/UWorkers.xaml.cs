@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using Microsoft.Win32;
 using System.IO;
+using ClosedXML.Excel;
 
 namespace Castle.Manager
 {
@@ -18,6 +19,45 @@ namespace Castle.Manager
         {
             InitializeComponent();
         }
+
+
+        private void ExportUsersToExcel(string filePath)
+        {
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Работники");
+                var users = _context.User.ToList(); // Получаем список работников из базы данных
+
+                // Добавляем заголовки
+                worksheet.Cell(1, 1).Value = "ID";
+                worksheet.Cell(1, 2).Value = "Логин";
+                worksheet.Cell(1, 3).Value = "Пароль";
+                worksheet.Cell(1, 4).Value = "Фамилия";
+                worksheet.Cell(1, 5).Value = "Имя";
+                worksheet.Cell(1, 6).Value = "Отчество";
+                worksheet.Cell(1, 7).Value = "Email";
+                worksheet.Cell(1, 8).Value = "Роль";
+                worksheet.Cell(1, 9).Value = "Фото";
+
+                // Заполняем данными
+                for (int i = 0; i < users.Count; i++)
+                {
+                    worksheet.Cell(i + 2, 1).Value = users[i].IdUser;
+                    worksheet.Cell(i + 2, 2).Value = users[i].Login;
+                    worksheet.Cell(i + 2, 3).Value = users[i].Password;
+                    worksheet.Cell(i + 2, 4).Value = users[i].Surname;
+                    worksheet.Cell(i + 2, 5).Value = users[i].UserName;
+                    worksheet.Cell(i + 2, 6).Value = users[i].Patronymic;
+                    worksheet.Cell(i + 2, 7).Value = users[i].Email;
+                    worksheet.Cell(i + 2, 8).Value = users[i].RoleID;
+                    worksheet.Cell(i + 2, 9).Value = users[i].PhotoID;
+                }
+
+                // Сохраняем файл
+                workbook.SaveAs(filePath);
+            }
+        }
+
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -182,9 +222,20 @@ namespace Castle.Manager
             }
         }
 
-        private void ExportToExcel_Click(object sender, RoutedEventArgs e)
+        private void ExportUsersButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Логика экспорта в Excel будет добавлена позже.");
+            var saveFileDialog = new Microsoft.Win32.SaveFileDialog
+            {
+                Filter = "Excel files (*.xlsx)|*.xlsx",
+                DefaultExt = "xlsx",
+                FileName = "users.xlsx"
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                ExportUsersToExcel(saveFileDialog.FileName);
+                MessageBox.Show("Экспорт работников завершён!");
+            }
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)

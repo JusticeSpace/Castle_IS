@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <local:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter"/>
+            <local:PriceConverter x:Key="PriceConverter"/>
             <CollectionViewSource x:Key="CategoriesViewSource" Source="{Binding Categories}"/>
             <CollectionViewSource x:Key="EditingCategoriesViewSource"/>
             <CollectionViewSource x:Key="SuppliersViewSource" Source="{Binding Suppliers}"/>
@@ -146,7 +147,7 @@
                             <Style TargetType="TextBox" BasedOn="{StaticResource CenteredEditingTextBoxStyle}"/>
                         </DataGridTextColumn.EditingElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat={}{0} ₽}" Width="Auto">
+                    <DataGridTextColumn Header="Цена" Binding="{Binding Price, Converter={StaticResource PriceConverter}, UpdateSourceTrigger=PropertyChanged}" Width="Auto">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock" BasedOn="{StaticResource CenteredTextBlockStyle}"/>
                         </DataGridTextColumn.ElementStyle>
@@ -242,7 +243,7 @@
         <!-- Нижняя панель с дополнительными действиями -->
         <materialDesign:Card Grid.Row="3" Margin="20,10,20,20" Padding="15">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Экспорт в Excel" Click="ExportToExcel_Click"
+                <Button Content="Экспорт в Excel" Click="ExportProductsButton_Click"
                         Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,0,10,0">
                     <Button.ContentTemplate>
                         <DataTemplate>
