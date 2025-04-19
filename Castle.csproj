@@ -99,8 +99,14 @@
     <Compile Include="ForEveryone\AddProd.xaml.cs">
       <DependentUpon>AddProd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\AddWorker.xaml.cs">
+      <DependentUpon>AddWorker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\ManagerrWindow.xaml.cs">
       <DependentUpon>ManagerrWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UWorkers.xaml.cs">
+      <DependentUpon>UWorkers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model.Context.cs">
       <AutoGen>True</AutoGen>
@@ -182,7 +188,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Manager\AddWorker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\ManagerrWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UWorkers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

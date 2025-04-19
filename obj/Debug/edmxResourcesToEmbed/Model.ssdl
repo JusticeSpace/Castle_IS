@@ -93,7 +93,6 @@
     <Key>
       <PropertyRef Name="IdUser" />
     </Key>
-    <Property Name="IdUser" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="Surname" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="Patronymic" Type="nvarchar" MaxLength="30" />
@@ -101,8 +100,8 @@
     <Property Name="RoleID" Type="int" />
     <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="Login" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="WarehouseID" Type="int" />
     <Property Name="PhotoID" Type="int" />
+    <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <Association Name="FK__Address__CityID__5EBF139D">
     <End Role="City" Type="Self.City" Multiplicity="0..1" />

@@ -92,3 +92,7 @@ C:\ST\Castle_\Castle_IS\obj\Debug\Castle.csproj.CoreCompileInputs.cache
 C:\ST\Castle_\Castle_IS\obj\Debug\Castle.csproj.Up2Date
 C:\ST\Castle_\Castle_IS\obj\Debug\Castle.exe
 C:\ST\Castle_\Castle_IS\obj\Debug\Castle.pdb
+C:\ST\Castle_\Castle_IS\obj\Debug\Manager\AddWorker.baml
+C:\ST\Castle_\Castle_IS\obj\Debug\Manager\AddWorker.g.cs
+C:\ST\Castle_\Castle_IS\obj\Debug\Manager\UWorkers.g.cs
+C:\ST\Castle_\Castle_IS\obj\Debug\Manager\UWorkers.baml

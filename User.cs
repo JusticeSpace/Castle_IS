@@ -14,7 +14,6 @@ namespace Castle
     
     public partial class User
     {
-        public int IdUser { get; set; }
         public string UserName { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }
@@ -22,8 +21,8 @@ namespace Castle
         public Nullable<int> RoleID { get; set; }
         public string Password { get; set; }
         public string Login { get; set; }
-        public Nullable<int> WarehouseID { get; set; }
         public Nullable<int> PhotoID { get; set; }
+        public int IdUser { get; set; }
     
         public virtual Photos Photos { get; set; }
         public virtual Roles Roles { get; set; }

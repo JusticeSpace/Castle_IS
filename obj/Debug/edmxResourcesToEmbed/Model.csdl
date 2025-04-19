@@ -109,7 +109,6 @@
     <Key>
       <PropertyRef Name="IdUser" />
     </Key>
-    <Property Name="IdUser" Type="Int32" Nullable="false" />
     <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -117,8 +116,8 @@
     <Property Name="RoleID" Type="Int32" />
     <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="WarehouseID" Type="Int32" />
     <Property Name="PhotoID" Type="Int32" />
+    <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="Photos" Relationship="Self.FK_User_Photos" FromRole="User" ToRole="Photos" />
     <NavigationProperty Name="Roles" Relationship="Self.FK__User__RoleID__66603565" FromRole="User" ToRole="Roles" />
   </EntityType>

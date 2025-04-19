@@ -98,7 +98,6 @@
           <Key>
             <PropertyRef Name="IdUser" />
           </Key>
-          <Property Name="IdUser" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Patronymic" Type="nvarchar" MaxLength="30" />
@@ -106,8 +105,8 @@
           <Property Name="RoleID" Type="int" />
           <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="WarehouseID" Type="int" />
           <Property Name="PhotoID" Type="int" />
+          <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <Association Name="FK__Address__CityID__5EBF139D">
           <End Role="City" Type="Self.City" Multiplicity="0..1" />
@@ -411,7 +410,6 @@
           <Key>
             <PropertyRef Name="IdUser" />
           </Key>
-          <Property Name="IdUser" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -419,8 +417,8 @@
           <Property Name="RoleID" Type="Int32" />
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="WarehouseID" Type="Int32" />
           <Property Name="PhotoID" Type="Int32" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Photos" Relationship="Self.FK_User_Photos" FromRole="User" ToRole="Photos" />
           <NavigationProperty Name="Roles" Relationship="Self.FK__User__RoleID__66603565" FromRole="User" ToRole="Roles" />
         </EntityType>
@@ -730,7 +728,6 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="Amo_CastleModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
@@ -738,8 +735,8 @@
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
                 <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

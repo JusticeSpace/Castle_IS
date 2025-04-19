@@ -1,0 +1,253 @@
+﻿<Page x:Class="Castle.Manager.UWorkers"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Castle.SomeCode.Converter"
+      mc:Ignorable="d" 
+      d:DesignHeight="1040" d:DesignWidth="1780"
+      Title="Управление работниками"
+      Loaded="Page_Loaded">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter"/>
+            <CollectionViewSource x:Key="RolesViewSource" Source="{Binding Roles}"/>
+            <CollectionViewSource x:Key="EditingRolesViewSource"/>
+            <FontFamily x:Key="RobotoItalic">pack://application:,,,/Fonts/#Roboto Italic</FontFamily>
+            <Style x:Key="CenteredColumnHeaderStyle" TargetType="DataGridColumnHeader">
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{StaticResource RobotoItalic}"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Padding" Value="16,8,16,8"/>
+            </Style>
+            <Style x:Key="CenteredTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{StaticResource RobotoItalic}"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="CenteredEditingTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoItalic}"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="8"/>
+                <Setter Property="materialDesign:TextFieldAssist.TextFieldCornerRadius" Value="8"/>
+            </Style>
+            <Style x:Key="MaterialComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoItalic}"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="#00B4D8"/>
+                <Setter Property="Padding" Value="8"/>
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <materialDesign:Card Grid.Row="0" Margin="20" Padding="20" Background="{StaticResource MaterialDesignPaper}">
+            <TextBlock Text="Управление работниками" FontSize="28" FontFamily="{StaticResource RobotoItalic}"
+                       HorizontalAlignment="Center" Foreground="{StaticResource PrimaryHueMidBrush}"/>
+        </materialDesign:Card>
+
+        <!-- Панель поиска и фильтров -->
+        <materialDesign:Card Grid.Row="1" Margin="20,10,20,20" Padding="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="Seek" Grid.Column="0" Margin="0,0,15,0" FontSize="20" TextChanged="TextBox_TextChanged"
+                         materialDesign:HintAssist.Hint="Поиск по имени или ID"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         FontFamily="{StaticResource RobotoItalic}"/>
+                <ComboBox x:Name="RoleComboBox" Grid.Column="1" Margin="0,0,15,0" Width="250"
+                          ItemsSource="{Binding Source={StaticResource RolesViewSource}}"
+                          DisplayMemberPath="RoleName"
+                          SelectionChanged="RoleComboBox_SelectionChanged"
+                          Style="{StaticResource MaterialComboBoxStyle}"
+                          materialDesign:HintAssist.Hint="Фильтр по роли"/>
+                <Button Grid.Column="2" Click="AddWorker_Click" Style="{StaticResource MaterialDesignRaisedButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Plus" Margin="0,0,8,0"/>
+                        <TextBlock Text="Добавить работника" FontFamily="{StaticResource RobotoItalic}" FontSize="16"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </materialDesign:Card>
+
+        <!-- Таблица работников -->
+        <materialDesign:Card Grid.Row="2" Margin="20,0,20,20" Padding="15">
+            <DataGrid x:Name="DGWorkers" CanUserAddRows="False" AutoGenerateColumns="False"
+                      CanUserDeleteRows="True" IsReadOnly="False" RowEditEnding="DGWorkers_RowEditEnding"
+                      materialDesign:DataGridAssist.CellPadding="16 8 16 8"
+                      materialDesign:DataGridAssist.ColumnHeaderPadding="16 8 16 8"
+                      Style="{StaticResource MaterialDesignDataGrid}"
+                      AlternationCount="2" AlternatingRowBackground="#F5F5F5">
+                <DataGrid.Template>
+                    <ControlTemplate TargetType="{x:Type DataGrid}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="DG_ScrollViewer" Focusable="False"
+                                          materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True">
+                                <ScrollViewer.Resources>
+                                    <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource MaterialDesignScrollBar}">
+                                        <Setter Property="Width" Value="10"/>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="{StaticResource PrimaryHueMidBrush}"/>
+                                        <Setter Property="Opacity" Value="0.7"/>
+                                    </Style>
+                                </ScrollViewer.Resources>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Row="0"/>
+                                    <ItemsPresenter Grid.Row="1" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </DataGrid.Template>
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource CenteredColumnHeaderStyle}">
+                        <Setter Property="Background" Value="{StaticResource PrimaryHueMidBrush}"/>
+                        <Setter Property="Foreground" Value="White"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding IdUser, Mode=OneWay}" Width="Auto" IsReadOnly="True">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource CenteredTextBlockStyle}"/>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="*" IsReadOnly="True">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource CenteredTextBlockStyle}"/>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource CenteredTextBlockStyle}"/>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource CenteredEditingTextBoxStyle}"/>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding UserName}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource CenteredTextBlockStyle}"/>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource CenteredEditingTextBoxStyle}"/>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource CenteredTextBlockStyle}"/>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource CenteredEditingTextBoxStyle}"/>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Электронная почта" Binding="{Binding Email}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource CenteredTextBlockStyle}"/>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource CenteredEditingTextBoxStyle}"/>
+                        </DataGridTextColumn.EditingElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Роль" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Roles.RoleName}" Style="{StaticResource CenteredTextBlockStyle}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding Source={StaticResource EditingRolesViewSource}}"
+                                          DisplayMemberPath="RoleName"
+                                          SelectedItem="{Binding Roles, UpdateSourceTrigger=PropertyChanged}"
+                                          Style="{StaticResource MaterialComboBoxStyle}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Фото" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5">
+                                        <Image Source="{Binding Photos.Photo, Converter={StaticResource ByteArrayToImageConverter}}"
+                                               Width="100" Height="100" Stretch="Uniform"/>
+                                    </Border>
+                                    <Button Content="Изменить" Click="ChangePhoto_Click"
+                                            Style="{StaticResource MaterialDesignFlatButton}" Margin="0,5,0,0"
+                                            FontFamily="{StaticResource RobotoItalic}" FontSize="14"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Действия" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Сохранить" Click="SaveChanges_Click"
+                                            Style="{StaticResource MaterialDesignFlatButton}" Margin="2"
+                                            FontFamily="{StaticResource RobotoItalic}" FontSize="14"/>
+                                    <Button Content="Удалить" Click="DeleteWorker_Click"
+                                            Style="{StaticResource MaterialDesignFlatButton}" Margin="2"
+                                            FontFamily="{StaticResource RobotoItalic}" FontSize="14"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </materialDesign:Card>
+
+        <!-- Нижняя панель с дополнительными действиями -->
+        <materialDesign:Card Grid.Row="3" Margin="20,10,20,20" Padding="15">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Экспорт в Excel" Click="ExportToExcel_Click"
+                        Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,0,10,0">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="FileExcel" Margin="0,0,8,0"/>
+                                <TextBlock Text="Экспорт в Excel" FontFamily="{StaticResource RobotoItalic}" FontSize="16"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+                <Button Content="Обновить" Click="Refresh_Click"
+                        Style="{StaticResource MaterialDesignRaisedButton}">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Refresh" Margin="0,0,8,0"/>
+                                <TextBlock Text="Обновить" FontFamily="{StaticResource RobotoItalic}" FontSize="16"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</Page>

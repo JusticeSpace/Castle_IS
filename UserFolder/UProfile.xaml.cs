@@ -34,7 +34,6 @@ namespace Castle.UserFolder
                 {
                     DataContext = _currentUser;
 
-                    // Проверяем, есть ли фото (PhotoID не null)
                     if (_currentUser.PhotoID.HasValue)
                     {
                         var photo = _context.Photos
@@ -53,31 +52,34 @@ namespace Castle.UserFolder
                                     bitmap.EndInit();
                                     UserImage.Source = bitmap;
                                     UserImage.Visibility = Visibility.Visible;
+                                    ImageStatusText.Text = "";
                                     ImageStatusText.Visibility = Visibility.Collapsed;
                                 }
                             }
-                            catch (Exception ex)
+                            catch (Exception)
                             {
-                                // Если не удалось обработать изображение, показываем статус "Нет фото"
+                                // Silently handle photo loading failure
                                 UserImage.Source = null;
                                 UserImage.Visibility = Visibility.Collapsed;
+                                ImageStatusText.Text = "Нет фото";
                                 ImageStatusText.Visibility = Visibility.Visible;
-                                MessageBox.Show($"Не удалось загрузить фото: {ex.Message}", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
                         }
                         else
                         {
-                            // Если фото отсутствует или повреждено, показываем статус
+                            // No valid photo data
                             UserImage.Source = null;
                             UserImage.Visibility = Visibility.Collapsed;
+                            ImageStatusText.Text = "Нет фото";
                             ImageStatusText.Visibility = Visibility.Visible;
                         }
                     }
                     else
                     {
-                        // Если PhotoID отсутствует, просто показываем статус
+                        // No PhotoID
                         UserImage.Source = null;
                         UserImage.Visibility = Visibility.Collapsed;
+                        ImageStatusText.Text = "Нет фото";
                         ImageStatusText.Visibility = Visibility.Visible;
                     }
                 }

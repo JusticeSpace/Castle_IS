@@ -81,6 +81,10 @@
                     <TextBlock Text="Информация о профиле" FontSize="24" FontFamily="pack://application:,,,/Fonts/#Roboto Bold Italic" Foreground="#00B4D8" Margin="0,0,0,5"/>
                     <Separator Background="#00B4D8" Height="1" Margin="0,0,0,5"/>
                     <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="ID пользователя" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Text="{Binding IdUser}" Style="{StaticResource StaticTextStyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Логин" Style="{StaticResource LabelStyle}"/>
                         <TextBlock Text="{Binding Login}" Style="{StaticResource StaticTextStyle}"/>
                     </StackPanel>
@@ -89,24 +93,16 @@
                         <TextBlock Text="{Binding Roles.RoleName}" Style="{StaticResource StaticTextStyle}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Имя" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Фамилия" Style="{StaticResource LabelStyle}"/>
                         <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Имя" Style="{StaticResource LabelStyle}"/>
-                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Отчество" Style="{StaticResource LabelStyle}"/>
                         <TextBox Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Дата рождения" Style="{StaticResource LabelStyle}"/>
-                        <TextBox Text="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged, StringFormat=dd.MM.yyyy}" Style="{StaticResource InputStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Телефон" Style="{StaticResource LabelStyle}"/>
-                        <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Электронная почта" Style="{StaticResource LabelStyle}"/>
