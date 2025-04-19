@@ -31,7 +31,6 @@ namespace Castle
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Country> Country { get; set; }
-        public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Photos> Photos { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
@@ -39,7 +38,6 @@ namespace Castle
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<Warehouse> Warehouse { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

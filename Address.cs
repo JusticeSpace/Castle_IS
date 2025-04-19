@@ -18,7 +18,6 @@ namespace Castle
         public Address()
         {
             this.Suppliers = new HashSet<Suppliers>();
-            this.Warehouse = new HashSet<Warehouse>();
         }
     
         public int AddressID { get; set; }
@@ -35,7 +34,5 @@ namespace Castle
         public virtual Street Street { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Suppliers> Suppliers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Warehouse> Warehouse { get; set; }
     }
 }

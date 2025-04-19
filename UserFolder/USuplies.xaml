@@ -77,11 +77,11 @@
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          FontFamily="{StaticResource RobotoItalic}"/>
                 <ComboBox x:Name="CategoryComboBox" Grid.Column="1" Margin="0,0,15,0" Width="250"
-          ItemsSource="{Binding Source={StaticResource CategoriesViewSource}}"
-          DisplayMemberPath="CategoryName"
-          SelectionChanged="CategoryComboBox_SelectionChanged"
-          Style="{StaticResource MaterialComboBoxStyle}"
-          materialDesign:HintAssist.Hint="Фильтр по категории"/>
+                          ItemsSource="{Binding Source={StaticResource CategoriesViewSource}}"
+                          DisplayMemberPath="CategoryName"
+                          SelectionChanged="CategoryComboBox_SelectionChanged"
+                          Style="{StaticResource MaterialComboBoxStyle}"
+                          materialDesign:HintAssist.Hint="Фильтр по категории"/>
                 <Button Grid.Column="2" Click="AddProduct_Click" Style="{StaticResource MaterialDesignRaisedButton}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Plus" Margin="0,0,8,0"/>
@@ -99,6 +99,33 @@
                       materialDesign:DataGridAssist.ColumnHeaderPadding="16 8 16 8"
                       Style="{StaticResource MaterialDesignDataGrid}"
                       AlternationCount="2" AlternatingRowBackground="#F5F5F5">
+                <DataGrid.Template>
+                    <ControlTemplate TargetType="{x:Type DataGrid}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="DG_ScrollViewer" Focusable="False"
+                                          materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True">
+                                <ScrollViewer.Resources>
+                                    <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource MaterialDesignScrollBar}">
+                                        <Setter Property="Width" Value="10"/>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="{StaticResource PrimaryHueMidBrush}"/>
+                                        <Setter Property="Opacity" Value="0.7"/>
+                                    </Style>
+                                </ScrollViewer.Resources>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Row="0"/>
+                                    <ItemsPresenter Grid.Row="1" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </DataGrid.Template>
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource CenteredColumnHeaderStyle}">
                         <Setter Property="Background" Value="{StaticResource PrimaryHueMidBrush}"/>
@@ -119,7 +146,7 @@
                             <Style TargetType="TextBox" BasedOn="{StaticResource CenteredEditingTextBoxStyle}"/>
                         </DataGridTextColumn.EditingElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=C2}" Width="Auto">
+                    <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat={}{0} ₽}" Width="Auto">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock" BasedOn="{StaticResource CenteredTextBlockStyle}"/>
                         </DataGridTextColumn.ElementStyle>
@@ -144,16 +171,17 @@
                         <DataGridTemplateColumn.CellEditingTemplate>
                             <DataTemplate>
                                 <ComboBox ItemsSource="{Binding Source={StaticResource EditingCategoriesViewSource}}"
-                      DisplayMemberPath="CategoryName"
-                      SelectedItem="{Binding Categories, UpdateSourceTrigger=PropertyChanged}"
-                      Style="{StaticResource MaterialComboBoxStyle}"/>
+                                          DisplayMemberPath="CategoryName"
+                                          SelectedItem="{Binding Categories, UpdateSourceTrigger=PropertyChanged}"
+                                          Style="{StaticResource MaterialComboBoxStyle}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellEditingTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Поставщик" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Suppliers.SupplierName}" Style="{StaticResource CenteredTextBlockStyle}"/>
+                                <TextBlock Text="{Binding Suppliers.SupplierName, FallbackValue='Без поставщика'}" 
+                                           Style="{StaticResource CenteredTextBlockStyle}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                         <DataGridTemplateColumn.CellEditingTemplate>
@@ -184,11 +212,11 @@
                                 <StackPanel Orientation="Vertical">
                                     <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5">
                                         <Image Source="{Binding Photos.Photo, Converter={StaticResource ByteArrayToImageConverter}}"
-                           Width="100" Height="100" Stretch="Uniform"/>
+                                               Width="100" Height="100" Stretch="Uniform"/>
                                     </Border>
                                     <Button Content="Изменить" Click="ChangePhoto_Click"
-                        Style="{StaticResource MaterialDesignFlatButton}" Margin="0,5,0,0"
-                        FontFamily="{StaticResource RobotoItalic}" FontSize="14"/>
+                                            Style="{StaticResource MaterialDesignFlatButton}" Margin="0,5,0,0"
+                                            FontFamily="{StaticResource RobotoItalic}" FontSize="14"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

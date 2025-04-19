@@ -39,16 +39,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Orders">
-      <EntityTypeMapping TypeName="Amo_CastleModel.Orders">
-        <MappingFragment StoreEntitySet="Orders">
-          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-          <ScalarProperty Name="SuppliersID" ColumnName="SuppliersID" />
-          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-          <ScalarProperty Name="ExpectedDelivery" ColumnName="ExpectedDelivery" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Photos">
       <EntityTypeMapping TypeName="Amo_CastleModel.Photos">
         <MappingFragment StoreEntitySet="Photos">

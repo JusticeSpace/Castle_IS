@@ -26,7 +26,6 @@ namespace Castle.UserFolder
         {
             _context = new Amo_CastleEntities1();
 
-            // Загружаем данные из БД
             _context.Categories.Load();
             _context.Suppliers.Load();
             _context.Product
@@ -35,12 +34,10 @@ namespace Castle.UserFolder
                 .Include(p => p.Photos)
                 .Load();
 
-            // Настраиваем источник данных для DataGrid
             _productViewSource = new CollectionViewSource();
             _productViewSource.Source = _context.Product.Local;
             DGProduct.ItemsSource = _productViewSource.View;
 
-            // Настраиваем CategoriesViewSource для фильтра
             var categoriesViewSource = (CollectionViewSource)FindResource("CategoriesViewSource");
             var categoriesList = _context.Categories.Local.ToList();
             var allCategories = new Categories { CategoryID = -1, CategoryName = "Все товары" };
@@ -48,9 +45,12 @@ namespace Castle.UserFolder
             categoriesViewSource.Source = categoriesList;
             CategoryComboBox.SelectedItem = allCategories;
 
-            // Настраиваем EditingCategoriesViewSource для редактирования
             var editingCategoriesViewSource = (CollectionViewSource)FindResource("EditingCategoriesViewSource");
-            editingCategoriesViewSource.Source = _context.Categories.Local; // Устанавливаем реальные категории
+            editingCategoriesViewSource.Source = _context.Categories.Local;
+
+            var suppliersViewSource = (CollectionViewSource)FindResource("SuppliersViewSource");
+            var suppliersList = _context.Suppliers.Local.OrderBy(s => s.SupplierName).ToList();
+            suppliersViewSource.Source = suppliersList;
         }
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
@@ -88,13 +88,14 @@ namespace Castle.UserFolder
                 var product = e.Row.Item as Product;
                 if (product?.Price < 0)
                 {
-                    MessageBox.Show("Цена не может быть отрицательной!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Цена не может быть отрицательной!", "Ошибка", MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
                     e.Cancel = true;
                 }
                 else
                 {
-                    _context.SaveChanges(); // Сохраняем изменения
-                                            // Убрали UpdateFilter, чтобы фильтр не менялся
+                    _context.SaveChanges(); 
+                                            
                 }
             }
         }
@@ -173,8 +174,6 @@ namespace Castle.UserFolder
                         var newPhoto = new Photos
                         {
                             Photo = imageBytes,
-                            EntityType = "Product",
-                            EntityID = product.ProductID
                         };
                         _context.Photos.Add(newPhoto);
                         product.Photos = newPhoto;

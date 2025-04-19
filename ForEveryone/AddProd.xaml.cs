@@ -55,7 +55,7 @@ namespace Castle.ForEveryone
         {
             try
             {
-                // Проверяем обязательные поля
+                // Проверка обязательных полей
                 if (string.IsNullOrWhiteSpace(_newProduct.ProductName))
                 {
                     MessageBox.Show("Введите название товара!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -77,29 +77,32 @@ namespace Castle.ForEveryone
                     return;
                 }
 
-                // (Опционально) Если фото обязательно
-                if (_photoData == null)
-                {
-                    MessageBox.Show("Загрузите фото товара!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-
-                // (Опционально) Если поставщик обязателен
-                if (string.IsNullOrEmpty(SupplierComboBox.Text))
+                // Проверка выбора поставщика
+                var selectedSupplier = SupplierComboBox.SelectedItem as Suppliers;
+                if (selectedSupplier == null)
                 {
                     MessageBox.Show("Выберите поставщика!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
+                _newProduct.SuppliersID = selectedSupplier.SuppliersID;
 
-                // Отладка: проверяем ProductID до сохранения
-                MessageBox.Show($"ProductID до сохранения: {_newProduct.ProductID}", "Отладка");
+                // Создаём новый экземпляр Product
+                var productToAdd = new Product
+                {
+                    ProductName = _newProduct.ProductName,
+                    Price = _newProduct.Price,
+                    Quantity = _newProduct.Quantity,
+                    CategoryID = _newProduct.CategoryID,
+                    SuppliersID = _newProduct.SuppliersID,
+                    Comment = _newProduct.Comment
+                };
 
                 // Добавляем продукт в контекст и сохраняем
-                _context.Product.Add(_newProduct);
+                _context.Product.Add(productToAdd);
                 _context.SaveChanges();
 
-                // Отладка: проверяем ProductID после сохранения
-                MessageBox.Show($"ProductID после сохранения: {_newProduct.ProductID}", "Отладка");
+                // Обновляем _newProduct
+                _newProduct = productToAdd;
 
                 // Проверяем, что ProductID сгенерирован
                 if (_newProduct.ProductID <= 0)
@@ -107,23 +110,16 @@ namespace Castle.ForEveryone
                     throw new Exception("ProductID не был сгенерирован корректно.");
                 }
 
-                // После сохранения продукта ProductID сгенерирован, теперь можно привязать фото
+                // Сохраняем фото, если оно есть
                 if (_photoData != null)
                 {
-                    // Проверяем, не используется ли этот ProductID уже в Photos
-                    if (_context.Photos.Any(p => p.EntityID == _newProduct.ProductID))
+                    var photo = new Photos
                     {
-                        throw new Exception($"EntityID {_newProduct.ProductID} уже используется в таблице Photos.");
-                    }
-
-                    _newProduct.Photos = new Photos
-                    {
-                        Photo = _photoData,
-                        EntityType = "Product",
-                        EntityID = _newProduct.ProductID
+                        Photo = _photoData
                     };
-                    _context.Photos.Add(_newProduct.Photos);
-                    _newProduct.PhotoID = _newProduct.Photos.PhotoID;
+                    _context.Photos.Add(photo);
+                    _context.SaveChanges();
+                    _newProduct.PhotoID = photo.PhotoID;
                     _context.SaveChanges();
                 }
 
@@ -132,11 +128,11 @@ namespace Castle.ForEveryone
             }
             catch (Exception ex)
             {
-                // Более подробное сообщение об ошибке
                 MessageBox.Show($"Ошибка при сохранении: {ex.Message}\nInner Exception: {ex.InnerException?.Message}",
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         // Обработчики для PriceTextBox
         private void PriceTextBox_GotFocus(object sender, RoutedEventArgs e)

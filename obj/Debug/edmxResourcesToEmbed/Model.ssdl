@@ -34,15 +34,6 @@
     <Property Name="CountryID" Type="int" Nullable="false" />
     <Property Name="Country" Type="varchar" MaxLength="26" Nullable="false" />
   </EntityType>
-  <EntityType Name="Orders">
-    <Key>
-      <PropertyRef Name="OrderID" />
-    </Key>
-    <Property Name="OrderID" Type="int" Nullable="false" />
-    <Property Name="SuppliersID" Type="int" />
-    <Property Name="OrderDate" Type="date" Nullable="false" />
-    <Property Name="ExpectedDelivery" Type="date" Nullable="false" />
-  </EntityType>
   <EntityType Name="Photos">
     <Key>
       <PropertyRef Name="PhotoID" />
@@ -146,18 +137,6 @@
       </Principal>
       <Dependent Role="Address">
         <PropertyRef Name="StreetID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Orders__Supplier__619B8048">
-    <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
-    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Suppliers">
-        <PropertyRef Name="SuppliersID" />
-      </Principal>
-      <Dependent Role="Orders">
-        <PropertyRef Name="SuppliersID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -269,7 +248,6 @@
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Photos" EntityType="Self.Photos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
@@ -288,10 +266,6 @@
     <AssociationSet Name="FK__Address__StreetI__60A75C0F" Association="Self.FK__Address__StreetI__60A75C0F">
       <End Role="Street" EntitySet="Street" />
       <End Role="Address" EntitySet="Address" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Orders__Supplier__619B8048" Association="Self.FK__Orders__Supplier__619B8048">
-      <End Role="Suppliers" EntitySet="Suppliers" />
-      <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
     <AssociationSet Name="FK__Suppliers__Addre__656C112C" Association="Self.FK__Suppliers__Addre__656C112C">
       <End Role="Address" EntitySet="Address" />

@@ -22,8 +22,6 @@ namespace Castle
         }
     
         public int PhotoID { get; set; }
-        public string EntityType { get; set; }
-        public int EntityID { get; set; }
         public byte[] Photo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

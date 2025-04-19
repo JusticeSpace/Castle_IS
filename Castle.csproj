@@ -81,19 +81,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Address.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Administrator\AdWindow.xaml.cs">
       <DependentUpon>AdWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Categories.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="City.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Country.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataFolder\ContextClass.cs" />
     <Compile Include="ForEveryone\AddProd.xaml.cs">
@@ -102,54 +102,51 @@
     <Compile Include="Manager\ManagerrWindow.xaml.cs">
       <DependentUpon>ManagerrWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Orders.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
+    <Compile Include="Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Photos.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Roles.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="SomeCode\ClassMB.cs" />
     <Compile Include="SomeCode\Converter.cs" />
     <Compile Include="SomeCode\NavigationHelper.cs" />
     <Compile Include="SomeCode\Suplier.cs" />
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Street.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Suppliers.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
-    </Compile>
-    <Compile Include="THE_SERVER.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>THE_SERVER.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="THE_SERVER.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
-    </Compile>
-    <Compile Include="THE_SERVER.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>THE_SERVER.edmx</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="UserFolder\ChangePasswordWindow.xaml.cs">
       <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
@@ -164,14 +161,11 @@
       <DependentUpon>USuplies.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserFolder\VisualTreeHelperExtensions.cs" />
-    <Compile Include="Warehouse.cs">
-      <DependentUpon>THE_SERVER.tt</DependentUpon>
-    </Compile>
     <Page Include="Administrator\AdWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Resource Include="Dictionary1.xaml"/>
+    <Resource Include="Dictionary1.xaml" />
     <Page Include="ForEveryone\AddProd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -227,14 +221,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="THE_SERVER.edmx">
+    <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>THE_SERVER.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="packages.config" />
-    <None Include="THE_SERVER.edmx.diagram">
-      <DependentUpon>THE_SERVER.edmx</DependentUpon>
+    <None Include="Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <Resource Include="Fonts\Roboto-Italic-VariableFont_wdth,wght.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -258,15 +252,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="THE_SERVER.Context.tt">
+    <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>THE_SERVER.edmx</DependentUpon>
-      <LastGenOutput>THE_SERVER.Context.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="THE_SERVER.tt">
+    <Content Include="Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>THE_SERVER.edmx</DependentUpon>
-      <LastGenOutput>THE_SERVER.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

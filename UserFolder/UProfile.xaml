@@ -12,77 +12,81 @@
     <Page.Resources>
         <local:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter"/>
         <Style x:Key="LabelStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Roboto Italic"/>
             <Setter Property="Foreground" Value="#00B4D8"/>
-            <Setter Property="Margin" Value="0,10,10,5"/>
+            <Setter Property="Margin" Value="0,5,10,5"/>
         </Style>
         <Style x:Key="InputStyle" TargetType="TextBox">
-            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Roboto Regular"/>
-            <Setter Property="Margin" Value="0,10,0,5"/>
+            <Setter Property="Margin" Value="0,5,0,5"/>
         </Style>
         <Style x:Key="StaticTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Roboto Regular"/>
-            <Setter Property="Margin" Value="0,10,0,5"/>
+            <Setter Property="Margin" Value="0,5,0,5"/>
         </Style>
     </Page.Resources>
 
-    <Grid Margin="20">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Заголовок -->
             <RowDefinition Height="*"/>
-            <!-- Основное содержимое -->
             <RowDefinition Height="Auto"/>
-            <!-- Кнопки -->
         </Grid.RowDefinitions>
 
         <!-- Заголовок -->
         <TextBlock Text="Профиль пользователя" 
-                   FontSize="48" 
+                   FontSize="36" 
                    FontFamily="pack://application:,,,/Fonts/#Roboto Bold Italic" 
                    Foreground="#00B4D8" 
                    HorizontalAlignment="Center" 
-                   Margin="0,0,0,20"/>
+                   Margin="0,0,0,10"/>
 
         <!-- Основное содержимое -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <!-- Фото -->
                 <ColumnDefinition Width="*"/>
-                <!-- Форма -->
             </Grid.ColumnDefinitions>
 
             <!-- Фото пользователя -->
-            <materialDesign:Card Grid.Column="0" Margin="0,0,20,0" Padding="15">
+            <materialDesign:Card Grid.Column="0" Margin="0,0,10,0" Padding="10">
                 <StackPanel>
-                    <Border CornerRadius="50" Width="100" Height="100" BorderBrush="#00B4D8" BorderThickness="2">
-                        <Border.Background>
-                            <ImageBrush ImageSource="{Binding UserPhotos.FirstOrDefault.Photo, Converter={StaticResource ByteArrayToImageConverter}}" 
-                                        Stretch="UniformToFill"/>
-                        </Border.Background>
+                    <Border CornerRadius="50" Width="80" Height="80" BorderBrush="#00B4D8" BorderThickness="2">
+                        <Grid>
+                            <Image x:Name="UserImage" Stretch="UniformToFill"/>
+                            <TextBlock x:Name="ImageStatusText" 
+                                       Text="Нет фото" 
+                                       FontSize="12" 
+                                       Foreground="Gray" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" 
+                                       Visibility="Visible"/>
+                        </Grid>
                     </Border>
                     <Button Content="Загрузить фото" 
                             Click="UploadPhoto_Click" 
                             Style="{StaticResource MaterialDesignFlatButton}" 
-                            Margin="0,10,0,0" 
-                            FontSize="14"
+                            Margin="0,5,0,0" 
+                            FontSize="12"
                             HorizontalAlignment="Center"/>
                 </StackPanel>
             </materialDesign:Card>
 
             <!-- Форма -->
-            <materialDesign:Card Grid.Column="1" Padding="20">
+            <materialDesign:Card Grid.Column="1" Padding="15">
                 <StackPanel>
-                    <!-- Личные данные -->
-                    <TextBlock Text="Личные данные" FontSize="28" FontFamily="pack://application:,,,/Fonts/#Roboto Bold Italic" Foreground="#00B4D8" Margin="0,0,0,10"/>
-                    <Separator Background="#00B4D8" Height="1" Margin="0,0,0,10"/>
+                    <TextBlock Text="Информация о профиле" FontSize="24" FontFamily="pack://application:,,,/Fonts/#Roboto Bold Italic" Foreground="#00B4D8" Margin="0,0,0,5"/>
+                    <Separator Background="#00B4D8" Height="1" Margin="0,0,0,5"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Логин" Style="{StaticResource LabelStyle}"/>
                         <TextBlock Text="{Binding Login}" Style="{StaticResource StaticTextStyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Роль" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Text="{Binding Roles.RoleName}" Style="{StaticResource StaticTextStyle}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Фамилия" Style="{StaticResource LabelStyle}"/>
@@ -90,49 +94,41 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Имя" Style="{StaticResource LabelStyle}"/>
-                        <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Отчество" Style="{StaticResource LabelStyle}"/>
                         <TextBox Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
                     </StackPanel>
-
-                    <!-- Контактная информация -->
-                    <TextBlock Text="Контактная информация" FontSize="28" FontFamily="pack://application:,,,/Fonts/#Roboto Bold Italic" Foreground="#00B4D8" Margin="0,20,0,10"/>
-                    <Separator Background="#00B4D8" Height="1" Margin="0,0,0,10"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Дата рождения" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding BirthDate, UpdateSourceTrigger=PropertyChanged, StringFormat=dd.MM.yyyy}" Style="{StaticResource InputStyle}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Телефон" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
+                    </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Электронная почта" Style="{StaticResource LabelStyle}"/>
                         <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
-                    </StackPanel>
-
-                    <!-- Дополнительная информация -->
-                    <TextBlock Text="Дополнительная информация" FontSize="28" FontFamily="pack://application:,,,/Fonts/#Roboto Bold Italic" Foreground="#00B4D8" Margin="0,20,0,10"/>
-                    <Separator Background="#00B4D8" Height="1" Margin="0,0,0,10"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Роль" Style="{StaticResource LabelStyle}"/>
-                        <TextBlock Text="{Binding Roles.RoleName}" Style="{StaticResource StaticTextStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Склад" Style="{StaticResource LabelStyle}"/>
-                        <TextBlock Text="{Binding Warehouse.HouseName}" Style="{StaticResource StaticTextStyle}"/>
                     </StackPanel>
                 </StackPanel>
             </materialDesign:Card>
         </Grid>
 
         <!-- Кнопки -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
-            <Button Content="Сохранить изменения" 
-                    Click="SaveChanges_Click" 
-                    Style="{StaticResource MaterialDesignRaisedButton}" 
-                    Width="200" Height="50" 
-                    FontSize="18" 
-                    Margin="0,0,10,0"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
             <Button Content="Сменить пароль" 
                     Click="ChangePassword_Click" 
                     Style="{StaticResource MaterialDesignRaisedButton}" 
-                    Width="200" Height="50" 
-                    FontSize="18"/>
+                    Width="180" Height="40" 
+                    FontSize="16" 
+                    Margin="0,0,10,0"/>
+            <Button Content="Сохранить изменения" 
+                    Click="SaveChanges_Click" 
+                    Style="{StaticResource MaterialDesignRaisedButton}" 
+                    Width="180" Height="40" 
+                    FontSize="16"/>
         </StackPanel>
     </Grid>
 </Page>
