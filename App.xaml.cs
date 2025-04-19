@@ -5,6 +5,7 @@ namespace Castle
     public partial class App : Application
     {
         public static int CurrentUserId { get; set; }
+        public static User CurrentUser { get; set; }
 
         public App()
         {

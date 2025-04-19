@@ -123,6 +123,9 @@ namespace Castle.ForEveryone
                     _context.SaveChanges();
                 }
 
+                // Логируем добавление товара
+                Logger.LogAction($"Добавлен товар: {_newProduct.ProductName} (ID: {_newProduct.ProductID}) пользователем (ID: {App.CurrentUserId})", App.CurrentUserId);
+
                 MessageBox.Show("Продукт добавлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 Close();
             }

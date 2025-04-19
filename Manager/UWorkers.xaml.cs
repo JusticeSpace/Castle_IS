@@ -20,15 +20,13 @@ namespace Castle.Manager
             InitializeComponent();
         }
 
-
         private void ExportUsersToExcel(string filePath)
         {
             using (var workbook = new XLWorkbook())
             {
                 var worksheet = workbook.Worksheets.Add("Работники");
-                var users = _context.User.ToList(); // Получаем список работников из базы данных
+                var users = _context.User.ToList();
 
-                // Добавляем заголовки
                 worksheet.Cell(1, 1).Value = "ID";
                 worksheet.Cell(1, 2).Value = "Логин";
                 worksheet.Cell(1, 3).Value = "Пароль";
@@ -39,7 +37,6 @@ namespace Castle.Manager
                 worksheet.Cell(1, 8).Value = "Роль";
                 worksheet.Cell(1, 9).Value = "Фото";
 
-                // Заполняем данными
                 for (int i = 0; i < users.Count; i++)
                 {
                     worksheet.Cell(i + 2, 1).Value = users[i].IdUser;
@@ -53,11 +50,9 @@ namespace Castle.Manager
                     worksheet.Cell(i + 2, 9).Value = users[i].PhotoID;
                 }
 
-                // Сохраняем файл
                 workbook.SaveAs(filePath);
             }
         }
-
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -108,6 +103,14 @@ namespace Castle.Manager
                 }
                 _context.User.Remove(user);
                 _context.SaveChanges();
+
+                // Логируем удаление с подробностями
+                Logger.LogAction(
+                    $"Удалён работник: {user.Surname} {user.UserName} (ID: {user.IdUser}) пользователем (ID: {App.CurrentUserId})",
+                    App.CurrentUserId,
+                    $"Логин: {user.Login}, Роль: {_context.Roles.FirstOrDefault(r => r.RoleID == user.RoleID)?.RoleName ?? "Неизвестная роль"}"
+                );
+
                 RefreshData();
             }
         }
@@ -125,6 +128,13 @@ namespace Castle.Manager
                 else
                 {
                     _context.SaveChanges();
+
+                    // Логируем редактирование
+                    Logger.LogAction(
+                        $"Отредактирован работник: {user.Surname} {user.UserName} (ID: {user.IdUser}) пользователем (ID: {App.CurrentUserId})",
+                        App.CurrentUserId,
+                        $"Логин: {user.Login}, Email: {user.Email ?? "не указан"}"
+                    );
                 }
             }
         }
@@ -213,6 +223,14 @@ namespace Castle.Manager
                     }
 
                     _context.SaveChanges();
+
+                    // Логируем изменение фото
+                    Logger.LogAction(
+                        $"Изменено фото работника: {user.Surname} {user.UserName} (ID: {user.IdUser}) пользователем (ID: {App.CurrentUserId})",
+                        App.CurrentUserId,
+                        "Фото обновлено"
+                    );
+
                     RefreshData();
                 }
                 catch (Exception ex)
@@ -234,6 +252,14 @@ namespace Castle.Manager
             if (saveFileDialog.ShowDialog() == true)
             {
                 ExportUsersToExcel(saveFileDialog.FileName);
+
+                // Логируем экспорт
+                Logger.LogAction(
+                    $"Экспортированы данные работников в Excel пользователем (ID: {App.CurrentUserId})",
+                    App.CurrentUserId,
+                    "Экспорт завершён"
+                );
+
                 MessageBox.Show("Экспорт работников завершён!");
             }
         }

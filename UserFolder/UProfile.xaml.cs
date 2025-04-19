@@ -58,7 +58,6 @@ namespace Castle.UserFolder
                             }
                             catch (Exception)
                             {
-                                // Silently handle photo loading failure
                                 UserImage.Source = null;
                                 UserImage.Visibility = Visibility.Collapsed;
                                 ImageStatusText.Text = "Нет фото";
@@ -67,7 +66,6 @@ namespace Castle.UserFolder
                         }
                         else
                         {
-                            // No valid photo data
                             UserImage.Source = null;
                             UserImage.Visibility = Visibility.Collapsed;
                             ImageStatusText.Text = "Нет фото";
@@ -76,7 +74,6 @@ namespace Castle.UserFolder
                     }
                     else
                     {
-                        // No PhotoID
                         UserImage.Source = null;
                         UserImage.Visibility = Visibility.Collapsed;
                         ImageStatusText.Text = "Нет фото";
@@ -106,6 +103,13 @@ namespace Castle.UserFolder
                     UserImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
                     UserImage.Visibility = Visibility.Visible;
                     ImageStatusText.Visibility = Visibility.Collapsed;
+
+                    // Логируем загрузку фото
+                    Logger.LogAction(
+                        $"Загружено новое фото профиля для пользователя (ID: {App.CurrentUserId})",
+                        App.CurrentUserId,
+                        "Фото профиля обновлено"
+                    );
                 }
                 catch (Exception ex)
                 {
@@ -142,6 +146,14 @@ namespace Castle.UserFolder
                 }
 
                 _context.SaveChanges();
+
+                // Логируем изменение профиля с подробностями
+                Logger.LogAction(
+                    $"Обновлён профиль пользователя: {_currentUser.Login} (ID: {_currentUser.IdUser})",
+                    App.CurrentUserId,
+                    $"ФИО: {_currentUser.Surname} {_currentUser.UserName} {_currentUser.Patronymic ?? ""}, Email: {_currentUser.Email ?? "не указан"}"
+                );
+
                 MessageBox.Show("Изменения сохранены!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)

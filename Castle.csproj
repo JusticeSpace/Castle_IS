@@ -123,6 +123,9 @@
     <Compile Include="Administrator\AdWindow.xaml.cs">
       <DependentUpon>AdWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Administrator\ULogs.xaml.cs">
+      <DependentUpon>ULogs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Categories.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -135,6 +138,9 @@
     <Compile Include="DataFolder\ContextClass.cs" />
     <Compile Include="ForEveryone\AddProd.xaml.cs">
       <DependentUpon>AddProd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Logs.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Manager\AddWorker.xaml.cs">
       <DependentUpon>AddWorker.xaml</DependentUpon>
@@ -195,6 +201,7 @@
     <Compile Include="UserFolder\ChangePasswordWindow.xaml.cs">
       <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserFolder\Logger.cs" />
     <Compile Include="UserFolder\UProfile.xaml.cs">
       <DependentUpon>UProfile.xaml</DependentUpon>
     </Compile>
@@ -210,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Resource Include="Dictionary1.xaml" />
+    <Page Include="Administrator\ULogs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ForEveryone\AddProd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

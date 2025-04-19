@@ -4,11 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1a0d08bf6ae046eea4450bfd1d787e3c" Name="Diagram1">
+      <Diagram DiagramId="5be40aec654343769e0907dddc08b0d3" Name="Diagram1">
         <EntityTypeShape EntityType="Amo_CastleModel.Address" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Amo_CastleModel.Categories" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="Amo_CastleModel.City" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Amo_CastleModel.Country" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Amo_CastleModel.Logs" Width="1.5" PointX="9.75" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Amo_CastleModel.Photos" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Amo_CastleModel.Product" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Amo_CastleModel.Roles" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
@@ -21,6 +22,7 @@
         <AssociationConnector Association="Amo_CastleModel.FK__Address__StreetI__60A75C0F" ManuallyRouted="false" />
         <AssociationConnector Association="Amo_CastleModel.FK__Suppliers__Addre__656C112C" ManuallyRouted="false" />
         <AssociationConnector Association="Amo_CastleModel.FK_Product_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="Amo_CastleModel.FK_Logs_Users" ManuallyRouted="false" />
         <AssociationConnector Association="Amo_CastleModel.FK_Product_Photos" ManuallyRouted="false" />
         <AssociationConnector Association="Amo_CastleModel.FK_User_Photos" ManuallyRouted="false" />
         <AssociationConnector Association="Amo_CastleModel.FK_Product_Suppliers" ManuallyRouted="false" />

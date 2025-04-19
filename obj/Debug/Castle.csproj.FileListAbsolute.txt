@@ -121,3 +121,5 @@ C:\ST\Castle_\Castle_IS\bin\Debug\System.Buffers.xml
 C:\ST\Castle_\Castle_IS\bin\Debug\System.Memory.xml
 C:\ST\Castle_\Castle_IS\bin\Debug\System.Numerics.Vectors.xml
 C:\ST\Castle_\Castle_IS\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\ST\Castle_\Castle_IS\obj\Debug\Administrator\ULogs.g.cs
+C:\ST\Castle_\Castle_IS\obj\Debug\Administrator\ULogs.baml

@@ -6,19 +6,20 @@
         xmlns:local="clr-namespace:Castle.Administrator"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="UserI" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Style="{StaticResource MaterialDesignWindow}">
+        Title="Admin Window" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Style="{StaticResource MaterialDesignWindow}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width ="140"/>
-            <ColumnDefinition Width ="*"/>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="1" Grid.Column="1" Background="#CAF0F8">
-            <Frame
-        x:Name="MainFrame"
-        NavigationUIVisibility="Hidden"
-        Background="#CAF0F8"/>
+
+        <!-- Основная область с Frame -->
+        <Grid Grid.Column="1" Background="#CAF0F8">
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Background="#CAF0F8"/>
         </Grid>
-        <Grid Grid.Row="1" Background="#E0F7FF">
+
+        <!-- Боковая панель -->
+        <Grid Background="#E0F7FF">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -27,37 +28,202 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-
-            <TextBlock Text="Castle"
-             FontFamily="Fonts/#Roboto Bold Italic"
-                   Foreground="#00B4D8"
-                   FontSize="30"
-                   VerticalAlignment="Bottom"
-                   HorizontalAlignment="Center"
-            />
-            <Border Width="100" Height="125" Grid.Column="1" Grid.Row="0" CornerRadius="50" Background="Transparent">
+            <!-- Иконка приложения -->
+            <Border Width="100" Height="125" Grid.Row="0" CornerRadius="50" Background="Transparent">
                 <Border.Clip>
-                    <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50" />
+                    <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50"/>
                 </Border.Clip>
                 <Image Source="/Images/image.png.jpeg" Height="90" Width="90" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Border>
-            <TextBlock Text="Выход"
- FontFamily="Fonts/#Roboto Bold Italic" Grid.Column="1" Grid.Row="7"
-       Foreground="Black"
-       FontSize="30"
-       VerticalAlignment="Bottom"
-       HorizontalAlignment="Center"
-/>
+            <!-- Логотип -->
+            <TextBlock Text="Castle"
+                       FontFamily="Fonts/#Roboto Bold Italic"
+                       Foreground="#00B4D8"
+                       FontSize="30"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Center"/>
+
+            <!-- Кнопка "Профиль" -->
+            <Button Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Profile_Click" Width="100" Height="100">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" Width="100" Height="100" CornerRadius="50" Background="Transparent">
+                            <StackPanel>
+                                <materialDesign:PackIcon x:Name="ProfileOutlineIcon" Kind="WorkerOutline" Foreground="#00B4D8" Width="100" Height="100"/>
+                                <materialDesign:PackIcon x:Name="ProfileFilledIcon" Kind="Worker" Foreground="#00B4D8" Width="100" Height="100" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsProfileSelected, RelativeSource={RelativeSource AncestorType=Window}}" Value="True">
+                                <Setter TargetName="ProfileOutlineIcon" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="ProfileFilledIcon" Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#33C4E0"/>
+                                <Setter TargetName="ProfileOutlineIcon" Property="Foreground" Value="#FFFFFF"/>
+                                <Setter TargetName="ProfileFilledIcon" Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#0077B6"/>
+                                <Setter TargetName="ProfileOutlineIcon" Property="Foreground" Value="#FFFFFF"/>
+                                <Setter TargetName="ProfileFilledIcon" Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
             <TextBlock Text="Профиль" Grid.Row="1"
- FontFamily="Fonts/#Roboto Bold Italic"
-       Foreground="Black"
-       FontSize="30"
-       VerticalAlignment="Bottom"
-       HorizontalAlignment="Center"
-/>
-            <Image Source="/Images/Arrows_Sign out.png" Grid.Row="7" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" MouseDown="Image_MouseDown"/>
-            <Image Source="/Images/Light _ Large _ ico-profile.png" Grid.Row="1" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                       FontFamily="Fonts/#Roboto Bold Italic"
+                       Foreground="#00B4D8"
+                       FontSize="30"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Center"/>
+
+            <!-- Кнопка "Товары" -->
+            <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Goods_Click" Width="90" Height="90">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" Width="90" Height="90" CornerRadius="45" Background="Transparent">
+                            <StackPanel>
+                                <materialDesign:PackIcon x:Name="GoodsOutlineIcon" Kind="CubeOutline" Foreground="#00B4D8" Width="90" Height="90"/>
+                                <materialDesign:PackIcon x:Name="GoodsFilledIcon" Kind="Cube" Foreground="#00B4D8" Width="90" Height="90" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsGoodsSelected, RelativeSource={RelativeSource AncestorType=Window}}" Value="True">
+                                <Setter TargetName="GoodsOutlineIcon" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="GoodsFilledIcon" Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#33C4E0"/>
+                                <Setter TargetName="GoodsOutlineIcon" Property="Foreground" Value="#FFFFFF"/>
+                                <Setter TargetName="GoodsFilledIcon" Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#0077B6"/>
+                                <Setter TargetName="GoodsOutlineIcon" Property="Foreground" Value="#FFFFFF"/>
+                                <Setter TargetName="GoodsFilledIcon" Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <TextBlock Text="Товары" Grid.Row="2"
+                       FontFamily="Fonts/#Roboto Bold Italic"
+                       Foreground="#00B4D8"
+                       FontSize="30"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Center"/>
+
+            <!-- Кнопка "Работники" -->
+            <Button Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Workers_Click" Width="90" Height="90">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" Width="90" Height="90" CornerRadius="45" Background="Transparent">
+                            <StackPanel>
+                                <materialDesign:PackIcon x:Name="WorkersOutlineIcon" Kind="AccountMultipleOutline" Foreground="#00B4D8" Width="90" Height="90"/>
+                                <materialDesign:PackIcon x:Name="WorkersFilledIcon" Kind="AccountMultiple" Foreground="#00B4D8" Width="90" Height="90" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsWorkersSelected, RelativeSource={RelativeSource AncestorType=Window}}" Value="True">
+                                <Setter TargetName="WorkersOutlineIcon" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="WorkersFilledIcon" Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#33C4E0"/>
+                                <Setter TargetName="WorkersOutlineIcon" Property="Foreground" Value="#FFFFFF"/>
+                                <Setter TargetName="WorkersFilledIcon" Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#0077B6"/>
+                                <Setter TargetName="WorkersOutlineIcon" Property="Foreground" Value="#FFFFFF"/>
+                                <Setter TargetName="WorkersFilledIcon" Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <TextBlock Text="Работники" Grid.Row="3"
+                       FontFamily="Fonts/#Roboto Bold Italic"
+                       Foreground="#00B4D8"
+                       FontSize="30"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Center"/>
+
+            <!-- Кнопка "Журнал изменений" -->
+            <Button Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Logs_Click" Width="90" Height="90">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" Width="90" Height="90" CornerRadius="45" Background="Transparent">
+                            <StackPanel>
+                                <materialDesign:PackIcon x:Name="LogsOutlineIcon" Kind="ClockOutline" Foreground="#00B4D8" Width="90" Height="90"/>
+                                <materialDesign:PackIcon x:Name="LogsFilledIcon" Kind="Clock" Foreground="#00B4D8" Width="90" Height="90" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsLogsSelected, RelativeSource={RelativeSource AncestorType=Window}}" Value="True">
+                                <Setter TargetName="LogsOutlineIcon" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="LogsFilledIcon" Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#33C4E0"/>
+                                <Setter TargetName="LogsOutlineIcon" Property="Foreground" Value="#FFFFFF"/>
+                                <Setter TargetName="LogsFilledIcon" Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#0077B6"/>
+                                <Setter TargetName="LogsOutlineIcon" Property="Foreground" Value="#FFFFFF"/>
+                                <Setter TargetName="LogsFilledIcon" Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <TextBlock Text="Журнал" Grid.Row="4"
+                       FontFamily="Fonts/#Roboto Bold Italic"
+                       Foreground="#00B4D8"
+                       FontSize="30"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Center"/>
+
+            <!-- Кнопка "Выход" -->
+            <Button Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Exit_Click" Width="100" Height="100">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" Width="100" Height="100" CornerRadius="50" Background="Transparent">
+                            <StackPanel>
+                                <materialDesign:PackIcon x:Name="LogoutOutlineIcon" Kind="AccountOffOutline" Foreground="#00B4D8" Width="100" Height="100"/>
+                                <materialDesign:PackIcon x:Name="LogoutFilledIcon" Kind="AccountOff" Foreground="#00B4D8" Width="100" Height="100" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsLogoutSelected, RelativeSource={RelativeSource AncestorType=Window}}" Value="True">
+                                <Setter TargetName="LogoutOutlineIcon" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="LogoutFilledIcon" Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#33C4E0"/>
+                                <Setter TargetName="LogoutOutlineIcon" Property="Foreground" Value="#FFFFFF"/>
+                                <Setter TargetName="LogoutFilledIcon" Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#0077B6"/>
+                                <Setter TargetName="LogoutOutlineIcon" Property="Foreground" Value="#FFFFFF"/>
+                                <Setter TargetName="LogoutFilledIcon" Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <TextBlock Text="Выход" Grid.Row="7"
+                       FontFamily="Fonts/#Roboto Bold Italic"
+                       Foreground="#00B4D8"
+                       FontSize="30"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>

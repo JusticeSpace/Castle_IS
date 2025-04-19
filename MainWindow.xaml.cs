@@ -19,6 +19,7 @@ namespace Castle
             _context = new Amo_CastleEntities1();
             InitializeComponent();
         }
+
         private void Pas_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -51,7 +52,6 @@ namespace Castle
                 return;
             }
 
-            // Логика авторизации с использованием _context
             var user = _context.User.FirstOrDefault(u => u.Login == login && u.Password == password);
             if (user == null)
             {
@@ -59,10 +59,18 @@ namespace Castle
                 return;
             }
 
-            // Сохраняем IdUser в App
             App.CurrentUserId = user.IdUser;
 
-            // Переход на другие окна в зависимости от роли
+            // Получаем название роли
+            var roleName = _context.Roles.FirstOrDefault(r => r.RoleID == user.RoleID)?.RoleName ?? "Неизвестная роль";
+
+            // Логируем вход пользователя с подробностями
+            Logger.LogAction(
+                $"Пользователь вошёл в систему: {user.Login} (ID: {user.IdUser})",
+                user.IdUser,
+                $"Роль: {roleName}"
+            );
+
             switch (user.RoleID)
             {
                 case 1:

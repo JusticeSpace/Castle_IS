@@ -3,64 +3,16 @@
   "WorkspaceRootPath": "C:\\ST\\Castle_\\Castle_IS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\userfolder\\usuplies.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:userfolder\\usuplies.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|c:\\st\\castle_\\castle_is\\userfolder\\changepasswordwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:userfolder\\changepasswordwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|c:\\st\\castle_\\castle_is\\somecode\\priceconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:somecode\\priceconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|c:\\st\\castle_\\castle_is\\somecode\\converter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:somecode\\converter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\userfolder\\usuplies.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:userfolder\\usuplies.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\manager\\uworkers.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|c:\\st\\castle_\\castle_is\\manager\\uworkers.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:manager\\uworkers.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|c:\\st\\castle_\\castle_is\\manager\\uworkers.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:manager\\uworkers.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\manager\\addworker.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:manager\\addworker.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\foreveryone\\addprod.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:foreveryone\\addprod.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\manager\\managerrwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:manager\\managerrwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\manager\\managerrwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:manager\\managerrwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\manager\\addworker.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:manager\\addworker.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\foreveryone\\addprod.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:foreveryone\\addprod.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\userfolder\\uprofile.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|c:\\st\\castle_\\castle_is\\userfolder\\uprofile.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:userfolder\\uprofile.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\userfolder\\uprofile.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:userfolder\\uprofile.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\userfolder\\userwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:userfolder\\userwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -70,194 +22,45 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Converter.cs",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\SomeCode\\Converter.cs",
-              "RelativeDocumentMoniker": "SomeCode\\Converter.cs",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\SomeCode\\Converter.cs",
-              "RelativeToolTip": "SomeCode\\Converter.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAAwCwAAABhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T17:35:59.381Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PriceConverter.cs",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\SomeCode\\PriceConverter.cs",
-              "RelativeDocumentMoniker": "SomeCode\\PriceConverter.cs",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\SomeCode\\PriceConverter.cs",
-              "RelativeToolTip": "SomeCode\\PriceConverter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T17:21:31.894Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "USuplies.xaml",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\USuplies.xaml",
-              "RelativeDocumentMoniker": "UserFolder\\USuplies.xaml",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\USuplies.xaml",
-              "RelativeToolTip": "UserFolder\\USuplies.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-19T12:53:14.376Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ManagerrWindow.xaml",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Manager\\ManagerrWindow.xaml",
-              "RelativeDocumentMoniker": "Manager\\ManagerrWindow.xaml",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Manager\\ManagerrWindow.xaml",
-              "RelativeToolTip": "Manager\\ManagerrWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-19T12:46:15.474Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ManagerrWindow.xaml.cs",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Manager\\ManagerrWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Manager\\ManagerrWindow.xaml.cs",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Manager\\ManagerrWindow.xaml.cs",
-              "RelativeToolTip": "Manager\\ManagerrWindow.xaml.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAkwGAAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T12:48:59.292Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AddProd.xaml.cs",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\ForEveryone\\AddProd.xaml.cs",
-              "RelativeDocumentMoniker": "ForEveryone\\AddProd.xaml.cs",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\ForEveryone\\AddProd.xaml.cs",
-              "RelativeToolTip": "ForEveryone\\AddProd.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADkAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T12:54:02.717Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "USuplies.xaml.cs",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\USuplies.xaml.cs",
-              "RelativeDocumentMoniker": "UserFolder\\USuplies.xaml.cs",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\USuplies.xaml.cs",
-              "RelativeToolTip": "UserFolder\\USuplies.xaml.cs",
-              "ViewState": "AgIAAJYAAAAAAAAAAAAmwJwAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T12:53:27.585Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UWorkers.xaml",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Manager\\UWorkers.xaml",
-              "RelativeDocumentMoniker": "Manager\\UWorkers.xaml",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Manager\\UWorkers.xaml",
-              "RelativeToolTip": "Manager\\UWorkers.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-19T13:09:14.397Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "UWorkers.xaml.cs",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Manager\\UWorkers.xaml.cs",
               "RelativeDocumentMoniker": "Manager\\UWorkers.xaml.cs",
               "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Manager\\UWorkers.xaml.cs",
               "RelativeToolTip": "Manager\\UWorkers.xaml.cs",
-              "ViewState": "AgIAANQAAAAAAAAAAAAwwOEAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAUwD4AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T13:09:43.048Z",
+              "WhenOpened": "2025-04-19T21:56:26.349Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "AddWorker.xaml",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Manager\\AddWorker.xaml",
-              "RelativeDocumentMoniker": "Manager\\AddWorker.xaml",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Manager\\AddWorker.xaml",
-              "RelativeToolTip": "Manager\\AddWorker.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-19T13:15:12.414Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "AddWorker.xaml.cs",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Manager\\AddWorker.xaml.cs",
-              "RelativeDocumentMoniker": "Manager\\AddWorker.xaml.cs",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Manager\\AddWorker.xaml.cs",
-              "RelativeToolTip": "Manager\\AddWorker.xaml.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAYwBwAAAAsAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "ChangePasswordWindow.xaml.cs",
+              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\ChangePasswordWindow.xaml.cs",
+              "RelativeDocumentMoniker": "UserFolder\\ChangePasswordWindow.xaml.cs",
+              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\ChangePasswordWindow.xaml.cs",
+              "RelativeToolTip": "UserFolder\\ChangePasswordWindow.xaml.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAkwDAAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T13:16:53.804Z",
+              "WhenOpened": "2025-04-19T21:56:05.182Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "AddProd.xaml",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\ForEveryone\\AddProd.xaml",
-              "RelativeDocumentMoniker": "ForEveryone\\AddProd.xaml",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\ForEveryone\\AddProd.xaml",
-              "RelativeToolTip": "ForEveryone\\AddProd.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-19T12:53:47.112Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 2,
               "Title": "UProfile.xaml.cs",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\UProfile.xaml.cs",
               "RelativeDocumentMoniker": "UserFolder\\UProfile.xaml.cs",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\UProfile.xaml.cs",
-              "RelativeToolTip": "UserFolder\\UProfile.xaml.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAA7wEUAAAAyAAAAAAAAAA==",
+              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\UProfile.xaml.cs*",
+              "RelativeToolTip": "UserFolder\\UProfile.xaml.cs*",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAkwKsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T13:03:21.528Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "UProfile.xaml",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\UProfile.xaml",
-              "RelativeDocumentMoniker": "UserFolder\\UProfile.xaml",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\UProfile.xaml",
-              "RelativeToolTip": "UserFolder\\UProfile.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-19T12:53:12.867Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "UserWindow.xaml",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\UserWindow.xaml",
-              "RelativeDocumentMoniker": "UserFolder\\UserWindow.xaml",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\UserWindow.xaml",
-              "RelativeToolTip": "UserFolder\\UserWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-19T12:43:30.372Z",
+              "WhenOpened": "2025-04-19T21:55:54.607Z",
               "EditorCaption": ""
             }
           ]

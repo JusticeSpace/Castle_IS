@@ -41,6 +41,13 @@ namespace Castle.Manager
                     WorkerImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
                     WorkerImage.Visibility = Visibility.Visible;
                     ImageStatusText.Visibility = Visibility.Collapsed;
+
+                    // Логируем загрузку фото
+                    Logger.LogAction(
+                        $"Загружено фото для нового работника пользователем (ID: {App.CurrentUserId})",
+                        App.CurrentUserId,
+                        "Фото добавлено для нового работника"
+                    );
                 }
                 catch (Exception ex)
                 {
@@ -116,6 +123,16 @@ namespace Castle.Manager
                     _newUser.PhotoID = photo.PhotoID;
                     _context.SaveChanges();
                 }
+
+                // Получаем название роли для подробностей
+                var roleName = _context.Roles.FirstOrDefault(r => r.RoleID == _newUser.RoleID)?.RoleName ?? "Неизвестная роль";
+
+                // Логируем добавление нового работника с подробностями
+                Logger.LogAction(
+                    $"Добавлен новый работник: {_newUser.Surname} {_newUser.UserName} (ID: {_newUser.IdUser}) пользователем (ID: {App.CurrentUserId})",
+                    App.CurrentUserId,
+                    $"Логин: {_newUser.Login}, Роль: {roleName}, Email: {_newUser.Email ?? "не указан"}"
+                );
 
                 MessageBox.Show("Работник добавлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();

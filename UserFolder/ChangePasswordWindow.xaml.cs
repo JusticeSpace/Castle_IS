@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using MaterialDesignThemes.Wpf; // Добавляем пространство имён
+using MaterialDesignThemes.Wpf;
 
 namespace Castle.UserFolder
 {
@@ -65,6 +65,14 @@ namespace Castle.UserFolder
 
             user.Password = newPassword;
             _context.SaveChanges();
+
+            // Логируем изменение пароля с подробностями
+            Logger.LogAction(
+                $"Изменён пароль пользователя: {user.Login} (ID: {user.IdUser})",
+                App.CurrentUserId,
+                "Пароль успешно обновлён"
+            );
+
             MessageBox.Show("Пароль успешно изменён!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
             Close();
         }

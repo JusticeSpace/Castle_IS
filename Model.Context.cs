@@ -31,6 +31,7 @@ namespace Castle
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Country> Country { get; set; }
+        public virtual DbSet<Logs> Logs { get; set; }
         public virtual DbSet<Photos> Photos { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
