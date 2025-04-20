@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Amo_CastleModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Amo_CastleModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressID" />
@@ -22,8 +22,8 @@
           <Key>
             <PropertyRef Name="CategoryID" />
           </Key>
-          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CategoryName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -47,14 +47,23 @@
           <Property Name="Action" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="Details" Type="nvarchar" MaxLength="500" />
+          <Property Name="Details" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="SuppliersID" Type="int" />
+          <Property Name="OrderDate" Type="date" Nullable="false" />
+          <Property Name="ExpectedDelivery" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Photos">
           <Key>
             <PropertyRef Name="PhotoID" />
           </Key>
           <Property Name="PhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -108,6 +117,7 @@
           <Key>
             <PropertyRef Name="IdUser" />
           </Key>
+          <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Patronymic" Type="nvarchar" MaxLength="30" />
@@ -116,9 +126,8 @@
           <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="PhotoID" Type="int" />
-          <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Address__CityID__5EBF139D">
+        <Association Name="FK__Address__CityID__4CA06362">
           <End Role="City" Type="Self.City" Multiplicity="0..1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -130,7 +139,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Address__Country__5FB337D6">
+        <Association Name="FK__Address__Country__4D94879B">
           <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -142,7 +151,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Address__StreetI__60A75C0F">
+        <Association Name="FK__Address__StreetI__4E88ABD4">
           <End Role="Street" Type="Self.Street" Multiplicity="0..1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -154,7 +163,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Suppliers__Addre__656C112C">
+        <Association Name="FK__Orders__Supplier__4F7CD00D">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="SuppliersID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="SuppliersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suppliers__Addre__534D60F1">
           <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
           <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -166,7 +187,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User__RoleID__66603565">
+        <Association Name="FK__User__RoleID__5441852A">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -179,7 +200,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Logs_Users">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -275,6 +298,7 @@
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Photos" EntityType="Self.Photos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
@@ -282,23 +306,27 @@
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Address__CityID__5EBF139D" Association="Self.FK__Address__CityID__5EBF139D">
+          <AssociationSet Name="FK__Address__CityID__4CA06362" Association="Self.FK__Address__CityID__4CA06362">
             <End Role="City" EntitySet="City" />
             <End Role="Address" EntitySet="Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__Address__Country__5FB337D6" Association="Self.FK__Address__Country__5FB337D6">
+          <AssociationSet Name="FK__Address__Country__4D94879B" Association="Self.FK__Address__Country__4D94879B">
             <End Role="Country" EntitySet="Country" />
             <End Role="Address" EntitySet="Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__Address__StreetI__60A75C0F" Association="Self.FK__Address__StreetI__60A75C0F">
+          <AssociationSet Name="FK__Address__StreetI__4E88ABD4" Association="Self.FK__Address__StreetI__4E88ABD4">
             <End Role="Street" EntitySet="Street" />
             <End Role="Address" EntitySet="Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__Suppliers__Addre__656C112C" Association="Self.FK__Suppliers__Addre__656C112C">
+          <AssociationSet Name="FK__Orders__Supplier__4F7CD00D" Association="Self.FK__Orders__Supplier__4F7CD00D">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suppliers__Addre__534D60F1" Association="Self.FK__Suppliers__Addre__534D60F1">
             <End Role="Address" EntitySet="Address" />
             <End Role="Suppliers" EntitySet="Suppliers" />
           </AssociationSet>
-          <AssociationSet Name="FK__User__RoleID__66603565" Association="Self.FK__User__RoleID__66603565">
+          <AssociationSet Name="FK__User__RoleID__5441852A" Association="Self.FK__User__RoleID__5441852A">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
@@ -323,8 +351,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Amo_CastleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -340,17 +367,17 @@
           <Property Name="Building" Type="Int32" />
           <Property Name="Entrance" Type="Int32" />
           <Property Name="Flat" Type="Int32" />
-          <NavigationProperty Name="City" Relationship="Self.FK__Address__CityID__5EBF139D" FromRole="Address" ToRole="City" />
-          <NavigationProperty Name="Country" Relationship="Self.FK__Address__Country__5FB337D6" FromRole="Address" ToRole="Country" />
-          <NavigationProperty Name="Street" Relationship="Self.FK__Address__StreetI__60A75C0F" FromRole="Address" ToRole="Street" />
-          <NavigationProperty Name="Suppliers" Relationship="Self.FK__Suppliers__Addre__656C112C" FromRole="Address" ToRole="Suppliers" />
+          <NavigationProperty Name="City" Relationship="Self.FK__Address__CityID__4CA06362" FromRole="Address" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="Self.FK__Address__Country__4D94879B" FromRole="Address" ToRole="Country" />
+          <NavigationProperty Name="Street" Relationship="Self.FK__Address__StreetI__4E88ABD4" FromRole="Address" ToRole="Street" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.FK__Suppliers__Addre__534D60F1" FromRole="Address" ToRole="Suppliers" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="CategoryID" />
           </Key>
-          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Categories" FromRole="Categories" ToRole="Product" />
         </EntityType>
         <EntityType Name="City">
@@ -359,7 +386,7 @@
           </Key>
           <Property Name="CityID" Type="Int32" Nullable="false" />
           <Property Name="City1" Type="String" MaxLength="26" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="Self.FK__Address__CityID__5EBF139D" FromRole="City" ToRole="Address" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Address__CityID__4CA06362" FromRole="City" ToRole="Address" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -367,7 +394,7 @@
           </Key>
           <Property Name="CountryID" Type="Int32" Nullable="false" />
           <Property Name="Country1" Type="String" MaxLength="26" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="Self.FK__Address__Country__5FB337D6" FromRole="Country" ToRole="Address" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Address__Country__4D94879B" FromRole="Country" ToRole="Address" />
         </EntityType>
         <EntityType Name="Logs">
           <Key>
@@ -377,15 +404,25 @@
           <Property Name="Action" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Details" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="Self.FK_Logs_Users" FromRole="Logs" ToRole="User" />
+          <Property Name="Details" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="SuppliersID" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ExpectedDelivery" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.FK__Orders__Supplier__4F7CD00D" FromRole="Orders" ToRole="Suppliers" />
         </EntityType>
         <EntityType Name="Photos">
           <Key>
             <PropertyRef Name="PhotoID" />
           </Key>
           <Property Name="PhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Photos" FromRole="Photos" ToRole="Product" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Photos" FromRole="Photos" ToRole="User" />
         </EntityType>
@@ -411,7 +448,7 @@
           </Key>
           <Property Name="RoleID" Type="Int32" Nullable="false" />
           <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK__User__RoleID__66603565" FromRole="Roles" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK__User__RoleID__5441852A" FromRole="Roles" ToRole="User" />
         </EntityType>
         <EntityType Name="Street">
           <Key>
@@ -419,7 +456,7 @@
           </Key>
           <Property Name="StreetID" Type="Int32" Nullable="false" />
           <Property Name="Street1" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="Self.FK__Address__StreetI__60A75C0F" FromRole="Street" ToRole="Address" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Address__StreetI__4E88ABD4" FromRole="Street" ToRole="Address" />
         </EntityType>
         <EntityType Name="Suppliers">
           <Key>
@@ -431,7 +468,8 @@
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AddressID" Type="Int32" />
-          <NavigationProperty Name="Address" Relationship="Self.FK__Suppliers__Addre__656C112C" FromRole="Suppliers" ToRole="Address" />
+          <NavigationProperty Name="Address" Relationship="Self.FK__Suppliers__Addre__534D60F1" FromRole="Suppliers" ToRole="Address" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Supplier__4F7CD00D" FromRole="Suppliers" ToRole="Orders" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Suppliers" FromRole="Suppliers" ToRole="Product" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -448,6 +486,7 @@
           <Key>
             <PropertyRef Name="IdUser" />
           </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -456,12 +495,11 @@
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PhotoID" Type="Int32" />
-          <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Logs" Relationship="Self.FK_Logs_Users" FromRole="User" ToRole="Logs" />
           <NavigationProperty Name="Photos" Relationship="Self.FK_User_Photos" FromRole="User" ToRole="Photos" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK__User__RoleID__66603565" FromRole="User" ToRole="Roles" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__User__RoleID__5441852A" FromRole="User" ToRole="Roles" />
         </EntityType>
-        <Association Name="FK__Address__CityID__5EBF139D">
+        <Association Name="FK__Address__CityID__4CA06362">
           <End Role="City" Type="Self.City" Multiplicity="0..1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -473,7 +511,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Address__Country__5FB337D6">
+        <Association Name="FK__Address__Country__4D94879B">
           <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -485,7 +523,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Address__StreetI__60A75C0F">
+        <Association Name="FK__Address__StreetI__4E88ABD4">
           <End Role="Street" Type="Self.Street" Multiplicity="0..1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -497,7 +535,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Suppliers__Addre__656C112C">
+        <Association Name="FK__Suppliers__Addre__534D60F1">
           <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
           <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -530,6 +568,18 @@
             </Principal>
             <Dependent Role="Logs">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__Supplier__4F7CD00D">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="SuppliersID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="SuppliersID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -569,7 +619,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User__RoleID__66603565">
+        <Association Name="FK__User__RoleID__5441852A">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -587,6 +637,7 @@
           <EntitySet Name="City" EntityType="Self.City" />
           <EntitySet Name="Country" EntityType="Self.Country" />
           <EntitySet Name="Logs" EntityType="Self.Logs" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
           <EntitySet Name="Photos" EntityType="Self.Photos" />
           <EntitySet Name="Product" EntityType="Self.Product" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
@@ -594,19 +645,19 @@
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK__Address__CityID__5EBF139D" Association="Self.FK__Address__CityID__5EBF139D">
+          <AssociationSet Name="FK__Address__CityID__4CA06362" Association="Self.FK__Address__CityID__4CA06362">
             <End Role="City" EntitySet="City" />
             <End Role="Address" EntitySet="Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__Address__Country__5FB337D6" Association="Self.FK__Address__Country__5FB337D6">
+          <AssociationSet Name="FK__Address__Country__4D94879B" Association="Self.FK__Address__Country__4D94879B">
             <End Role="Country" EntitySet="Country" />
             <End Role="Address" EntitySet="Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__Address__StreetI__60A75C0F" Association="Self.FK__Address__StreetI__60A75C0F">
+          <AssociationSet Name="FK__Address__StreetI__4E88ABD4" Association="Self.FK__Address__StreetI__4E88ABD4">
             <End Role="Street" EntitySet="Street" />
             <End Role="Address" EntitySet="Address" />
           </AssociationSet>
-          <AssociationSet Name="FK__Suppliers__Addre__656C112C" Association="Self.FK__Suppliers__Addre__656C112C">
+          <AssociationSet Name="FK__Suppliers__Addre__534D60F1" Association="Self.FK__Suppliers__Addre__534D60F1">
             <End Role="Address" EntitySet="Address" />
             <End Role="Suppliers" EntitySet="Suppliers" />
           </AssociationSet>
@@ -617,6 +668,10 @@
           <AssociationSet Name="FK_Logs_Users" Association="Self.FK_Logs_Users">
             <End Role="User" EntitySet="User" />
             <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__Supplier__4F7CD00D" Association="Self.FK__Orders__Supplier__4F7CD00D">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_Photos" Association="Self.FK_Product_Photos">
             <End Role="Photos" EntitySet="Photos" />
@@ -630,7 +685,7 @@
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__User__RoleID__66603565" Association="Self.FK__User__RoleID__66603565">
+          <AssociationSet Name="FK__User__RoleID__5441852A" Association="Self.FK__User__RoleID__5441852A">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
@@ -723,11 +778,21 @@
           <EntitySetMapping Name="Logs">
             <EntityTypeMapping TypeName="Amo_CastleModel.Logs">
               <MappingFragment StoreEntitySet="Logs">
+                <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Action" ColumnName="Action" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Details" ColumnName="Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="Amo_CastleModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="SuppliersID" ColumnName="SuppliersID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="ExpectedDelivery" ColumnName="ExpectedDelivery" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -795,6 +860,7 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="Amo_CastleModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
@@ -803,7 +869,6 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Castle.UserFolder.SupplierDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="500">
+    <UserControl.Resources>
+        <FontFamily x:Key="RobotoItalic">pack://application:,,,/Fonts/#Roboto Italic</FontFamily>
+        <Style x:Key="DetailLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource RobotoItalic}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,5,10,5"/>
+        </Style>
+        <Style x:Key="DetailValueStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource RobotoItalic}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,5,0,5"/>
+        </Style>
+    </UserControl.Resources>
+    <materialDesign:Card Padding="20" Margin="10">
+        <StackPanel>
+            <TextBlock Text="Подробности о поставщике" FontSize="20" FontFamily="{StaticResource RobotoItalic}"
+                       HorizontalAlignment="Center" Margin="0,0,0,20" Foreground="{StaticResource PrimaryHueMidBrush}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!-- Название -->
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Название:" Style="{StaticResource DetailLabelStyle}"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SupplierName}" Style="{StaticResource DetailValueStyle}"/>
+                <!-- Контактное лицо -->
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Контактное лицо:" Style="{StaticResource DetailLabelStyle}"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ContactPerson, FallbackValue='Не указано'}" Style="{StaticResource DetailValueStyle}"/>
+                <!-- Телефон -->
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Телефон:" Style="{StaticResource DetailLabelStyle}"/>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Phone, FallbackValue='Не указано'}" Style="{StaticResource DetailValueStyle}"/>
+                <!-- Email -->
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Email:" Style="{StaticResource DetailLabelStyle}"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Email, FallbackValue='Не указано'}" Style="{StaticResource DetailValueStyle}"/>
+                <!-- Адрес -->
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Адрес:" Style="{StaticResource DetailLabelStyle}"/>
+                <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource DetailValueStyle}">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0}, {1}, {2}, д. {3}, корп. {4}, кв. {5}">
+                            <Binding Path="Address.Country.Country" FallbackValue="Не указано"/>
+                            <Binding Path="Address.City.City" FallbackValue="Не указано"/>
+                            <Binding Path="Address.Street.Street" FallbackValue="Не указано"/>
+                            <Binding Path="Address.HouseNum" FallbackValue="Не указано"/>
+                            <Binding Path="Address.Building" FallbackValue="Не указано"/>
+                            <Binding Path="Address.Flat" FallbackValue="Не указано"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </Grid>
+            <Button Content="Закрыть" Click="CloseDialog_Click"
+                    Style="{StaticResource MaterialDesignRaisedButton}" 
+                    Margin="0,20,0,0" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </materialDesign:Card>
+</UserControl>

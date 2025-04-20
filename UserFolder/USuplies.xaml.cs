@@ -1,4 +1,4 @@
-﻿using Castle; // Обновляем пространство имён на Castle
+﻿using Castle;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -6,9 +6,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using Microsoft.Win32; // Для OpenFileDialog
+using Microsoft.Win32;
 using Castle.ForEveryone;
 using ClosedXML.Excel;
+using MaterialDesignThemes.Wpf;
 
 namespace Castle.UserFolder
 {
@@ -28,10 +29,19 @@ namespace Castle.UserFolder
             _context = new Amo_CastleEntities1();
 
             _context.Categories.Load();
-            _context.Suppliers.Load();
+            _context.Suppliers
+                .Include(s => s.Address)
+                .Include(s => s.Address.Country)
+                .Include(s => s.Address.City)
+                .Include(s => s.Address.Street)
+                .Load();
             _context.Product
                 .Include(p => p.Categories)
                 .Include(p => p.Suppliers)
+                .Include(p => p.Suppliers.Address)
+                .Include(p => p.Suppliers.Address.Country)
+                .Include(p => p.Suppliers.Address.City)
+                .Include(p => p.Suppliers.Address.Street)
                 .Include(p => p.Photos)
                 .Load();
 
@@ -49,13 +59,15 @@ namespace Castle.UserFolder
             var editingCategoriesViewSource = (CollectionViewSource)FindResource("EditingCategoriesViewSource");
             editingCategoriesViewSource.Source = _context.Categories.Local;
 
-            // Настройка ComboBox для удаления категорий (исключаем "Все товары")
             var deleteCategoriesList = _context.Categories.Local.ToList();
             DeleteCategoryComboBox.ItemsSource = deleteCategoriesList;
 
             var suppliersViewSource = (CollectionViewSource)FindResource("SuppliersViewSource");
             var suppliersList = _context.Suppliers.Local.OrderBy(s => s.SupplierName).ToList();
             suppliersViewSource.Source = suppliersList;
+
+            var deleteSuppliersList = _context.Suppliers.Local.OrderBy(s => s.SupplierName).ToList();
+            DeleteSupplierComboBox.ItemsSource = deleteSuppliersList;
         }
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
@@ -83,7 +95,6 @@ namespace Castle.UserFolder
                 _context.Product.Remove(product);
                 _context.SaveChanges();
 
-                // Логируем удаление
                 Logger.LogAction(
                     $"Удалён товар: {product.ProductName} (ID: {product.ProductID}) пользователем (ID: {App.CurrentUserId})",
                     App.CurrentUserId,
@@ -101,46 +112,37 @@ namespace Castle.UserFolder
                 var product = e.Row.Item as Product;
                 if (product?.Price < 0)
                 {
-                    MessageBox.Show("Цена не может быть отрицательной!", "Ошибка", MessageBoxButton.OK,
-                        MessageBoxImage.Warning);
+                    MessageBox.Show("Цена не может быть отрицательной!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     e.Cancel = true;
                     return;
                 }
                 if (string.IsNullOrWhiteSpace(product.ProductName))
                 {
-                    MessageBox.Show("Название товара не может быть пустым!", "Ошибка", MessageBoxButton.OK,
-                        MessageBoxImage.Warning);
+                    MessageBox.Show("Название товара не может быть пустым!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     e.Cancel = true;
                     return;
                 }
                 if (product.Quantity < 0)
                 {
-                    MessageBox.Show("Количество не может быть отрицательным!", "Ошибка", MessageBoxButton.OK,
-                        MessageBoxImage.Warning);
+                    MessageBox.Show("Количество не может быть отрицательным!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     e.Cancel = true;
                     return;
                 }
 
-                // Проверяем, что CategoryID ссылается на существующую категорию
                 if (!_context.Categories.Any(c => c.CategoryID == product.CategoryID))
                 {
-                    MessageBox.Show("Выбранная категория не существует!", "Ошибка", MessageBoxButton.OK,
-                        MessageBoxImage.Warning);
+                    MessageBox.Show("Выбранная категория не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     e.Cancel = true;
                     return;
                 }
 
-                // Проверяем, что SuppliersID ссылается на существующего поставщика (если указано)
-                // Предполагаем, что SuppliersID = 0 означает "не указано"
                 if (product.SuppliersID != 0 && !_context.Suppliers.Any(s => s.SuppliersID == product.SuppliersID))
                 {
-                    MessageBox.Show("Выбранный поставщик не существует!", "Ошибка", MessageBoxButton.OK,
-                        MessageBoxImage.Warning);
+                    MessageBox.Show("Выбранный поставщик не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     e.Cancel = true;
                     return;
                 }
 
-                // Сохраняем оригинальные значения для логирования изменений
                 var originalProduct = _context.Entry(product).OriginalValues.ToObject() as Product;
                 try
                 {
@@ -148,13 +150,11 @@ namespace Castle.UserFolder
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Ошибка при сохранении изменений: {ex.Message}", "Ошибка", MessageBoxButton.OK,
-                        MessageBoxImage.Error);
+                    MessageBox.Show($"Ошибка при сохранении изменений: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     e.Cancel = true;
                     return;
                 }
 
-                // Формируем подробности изменений
                 string changes = "";
                 if (originalProduct.ProductName != product.ProductName)
                 {
@@ -185,7 +185,6 @@ namespace Castle.UserFolder
                     changes += $"Комментарий изменён с '{originalProduct.Comment ?? "не указан"}' на '{product.Comment ?? "не указан"}'. ";
                 }
 
-                // Логируем изменения
                 if (!string.IsNullOrEmpty(changes))
                 {
                     Logger.LogAction(
@@ -219,11 +218,10 @@ namespace Castle.UserFolder
         {
             if (_productViewSource?.View == null || Seek == null) return;
 
-            // Приводим View к ListCollectionView
             var listView = _productViewSource.View as ListCollectionView;
             if (listView != null && (listView.IsAddingNew || listView.IsEditingItem))
             {
-                return; // Не обновляем фильтр во время редактирования
+                return;
             }
 
             var searchText = Seek.Text?.ToLower() ?? "";
@@ -247,11 +245,14 @@ namespace Castle.UserFolder
             _context.Product
                 .Include(p => p.Categories)
                 .Include(p => p.Suppliers)
+                .Include(p => p.Suppliers.Address)
+                .Include(p => p.Suppliers.Address.Country)
+                .Include(p => p.Suppliers.Address.City)
+                .Include(p => p.Suppliers.Address.Street)
                 .Include(p => p.Photos)
                 .Load();
             _productViewSource.Source = _context.Product.Local;
 
-            // Обновляем список категорий
             var categoriesViewSource = (CollectionViewSource)FindResource("CategoriesViewSource");
             var categoriesList = _context.Categories.Local.ToList();
             var allCategories = new Categories { CategoryID = -1, CategoryName = "Все товары" };
@@ -261,9 +262,15 @@ namespace Castle.UserFolder
             var editingCategoriesViewSource = (CollectionViewSource)FindResource("EditingCategoriesViewSource");
             editingCategoriesViewSource.Source = _context.Categories.Local;
 
-            // Обновляем список категорий для удаления (исключаем "Все товары")
             var deleteCategoriesList = _context.Categories.Local.ToList();
             DeleteCategoryComboBox.ItemsSource = deleteCategoriesList;
+
+            var suppliersViewSource = (CollectionViewSource)FindResource("SuppliersViewSource");
+            var suppliersList = _context.Suppliers.Local.OrderBy(s => s.SupplierName).ToList();
+            suppliersViewSource.Source = suppliersList;
+
+            var deleteSuppliersList = _context.Suppliers.Local.OrderBy(s => s.SupplierName).ToList();
+            DeleteSupplierComboBox.ItemsSource = deleteSuppliersList;
 
             DGProduct.Items.Refresh();
         }
@@ -287,33 +294,26 @@ namespace Castle.UserFolder
 
             try
             {
-                // Проверяем, не существует ли уже категория с таким названием
                 if (_context.Categories.Any(c => c.CategoryName == categoryName))
                 {
                     MessageBox.Show("Категория с таким названием уже существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                // Добавляем новую категорию
                 var newCategory = new Categories
                 {
                     CategoryName = categoryName
-                    // Не устанавливаем CategoryID вручную, так как это IDENTITY
                 };
                 _context.Categories.Add(newCategory);
                 _context.SaveChanges();
 
-                // Логируем добавление категории
                 Logger.LogAction(
                     $"Добавлена категория: {newCategory.CategoryName} (ID: {newCategory.CategoryID}) пользователем (ID: {App.CurrentUserId})",
                     App.CurrentUserId,
                     "Категория успешно добавлена"
                 );
 
-                // Очищаем TextBox
                 CategoryNameTextBox.Text = string.Empty;
-
-                // Обновляем данные
                 RefreshData();
                 MessageBox.Show("Категория успешно добавлена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -332,14 +332,12 @@ namespace Castle.UserFolder
                 return;
             }
 
-            // Проверяем, не является ли это "Все товары"
             if (selectedCategory.CategoryID == -1)
             {
                 MessageBox.Show("Нельзя удалить категорию 'Все товары'!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            // Проверяем, используется ли категория в товарах
             if (_context.Product.Any(p => p.CategoryID == selectedCategory.CategoryID))
             {
                 MessageBox.Show("Эта категория используется в товарах. Удалите или измените категорию у товаров перед удалением!",
@@ -352,7 +350,6 @@ namespace Castle.UserFolder
             {
                 try
                 {
-                    // Удаляем категорию
                     if (_context.Entry(selectedCategory).State == EntityState.Detached)
                     {
                         _context.Categories.Attach(selectedCategory);
@@ -360,20 +357,133 @@ namespace Castle.UserFolder
                     _context.Categories.Remove(selectedCategory);
                     _context.SaveChanges();
 
-                    // Логируем удаление категории
                     Logger.LogAction(
                         $"Удалена категория: {selectedCategory.CategoryName} (ID: {selectedCategory.CategoryID}) пользователем (ID: {App.CurrentUserId})",
                         App.CurrentUserId,
                         "Категория успешно удалена"
                     );
 
-                    // Обновляем данные
                     RefreshData();
                     MessageBox.Show("Категория успешно удалена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Ошибка при удалении категории: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void AddSupplier_Click(object sender, RoutedEventArgs e)
+        {
+            var supplierName = SupplierNameTextBox.Text?.Trim();
+            var contactPerson = ContactPersonTextBox.Text?.Trim();
+            var phone = PhoneTextBox.Text?.Trim();
+            var email = EmailTextBox.Text?.Trim();
+            var addressIdText = AddressTextBox.Text?.Trim();
+
+            if (string.IsNullOrWhiteSpace(supplierName))
+            {
+                MessageBox.Show("Название поставщика не может быть пустым!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            int? addressId = null;
+            if (!string.IsNullOrWhiteSpace(addressIdText))
+            {
+                if (!int.TryParse(addressIdText, out int parsedAddressId))
+                {
+                    MessageBox.Show("ID адреса должен быть числом!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                addressId = parsedAddressId;
+
+                if (!_context.Address.Any(a => a.AddressID == addressId))
+                {
+                    MessageBox.Show("Указанный ID адреса не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            }
+
+            try
+            {
+                if (_context.Suppliers.Any(s => s.SupplierName == supplierName))
+                {
+                    MessageBox.Show("Поставщик с таким названием уже существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                var newSupplier = new Suppliers
+                {
+                    SupplierName = supplierName,
+                    ContactPerson = string.IsNullOrWhiteSpace(contactPerson) ? null : contactPerson,
+                    Phone = string.IsNullOrWhiteSpace(phone) ? null : phone,
+                    Email = string.IsNullOrWhiteSpace(email) ? null : email,
+                    AddressID = addressId
+                };
+                _context.Suppliers.Add(newSupplier);
+                _context.SaveChanges();
+
+                Logger.LogAction(
+                    $"Добавлен поставщик: {newSupplier.SupplierName} (ID: {newSupplier.SuppliersID}) пользователем (ID: {App.CurrentUserId})",
+                    App.CurrentUserId,
+                    $"Контактное лицо: {newSupplier.ContactPerson ?? "не указано"}, Телефон: {newSupplier.Phone ?? "не указан"}, Email: {newSupplier.Email ?? "не указан"}, Адрес ID: {newSupplier.AddressID?.ToString() ?? "не указан"}"
+                );
+
+                SupplierNameTextBox.Text = string.Empty;
+                ContactPersonTextBox.Text = string.Empty;
+                PhoneTextBox.Text = string.Empty;
+                EmailTextBox.Text = string.Empty;
+                AddressTextBox.Text = string.Empty;
+
+                RefreshData();
+                MessageBox.Show("Поставщик успешно добавлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при добавлении поставщика: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DeleteSupplier_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedSupplier = DeleteSupplierComboBox.SelectedItem as Suppliers;
+            if (selectedSupplier == null)
+            {
+                MessageBox.Show("Выберите поставщика для удаления!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (_context.Product.Any(p => p.SuppliersID == selectedSupplier.SuppliersID))
+            {
+                MessageBox.Show("Этот поставщик используется в товарах. Удалите или измените поставщика у товаров перед удалением!",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (MessageBox.Show($"Вы уверены, что хотите удалить поставщика '{selectedSupplier.SupplierName}'?",
+                "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    if (_context.Entry(selectedSupplier).State == EntityState.Detached)
+                    {
+                        _context.Suppliers.Attach(selectedSupplier);
+                    }
+                    _context.Suppliers.Remove(selectedSupplier);
+                    _context.SaveChanges();
+
+                    Logger.LogAction(
+                        $"Удалён поставщик: {selectedSupplier.SupplierName} (ID: {selectedSupplier.SuppliersID}) пользователем (ID: {App.CurrentUserId})",
+                        App.CurrentUserId,
+                        "Поставщик успешно удалён"
+                    );
+
+                    RefreshData();
+                    MessageBox.Show("Поставщик успешно удалён!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при удалении поставщика: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -408,7 +518,6 @@ namespace Castle.UserFolder
 
                     _context.SaveChanges();
 
-                    // Логируем изменение фото
                     Logger.LogAction(
                         $"Изменено фото товара: {product.ProductName} (ID: {product.ProductID}) пользователем (ID: {App.CurrentUserId})",
                         App.CurrentUserId,
@@ -424,14 +533,26 @@ namespace Castle.UserFolder
             }
         }
 
+        private void ViewSupplierDetails_Click(object sender, RoutedEventArgs e)
+        {
+            var product = (sender as Button).DataContext as Product;
+            if (product?.Suppliers == null) return;
+
+            var supplierDetails = new SupplierDetails
+            {
+                DataContext = product.Suppliers
+            };
+
+            DialogHost.Show(supplierDetails, "SupplierDialog");
+        }
+
         private void ExportProductsToExcel(string filePath)
         {
             using (var workbook = new XLWorkbook())
             {
                 var worksheet = workbook.Worksheets.Add("Товары");
-                var products = _context.Product.ToList(); // Получаем список товаров из базы данных
+                var products = _context.Product.ToList();
 
-                // Добавляем заголовки
                 worksheet.Cell(1, 1).Value = "ID";
                 worksheet.Cell(1, 2).Value = "Название";
                 worksheet.Cell(1, 3).Value = "Цена";
@@ -439,7 +560,6 @@ namespace Castle.UserFolder
                 worksheet.Cell(1, 5).Value = "Поставщик";
                 worksheet.Cell(1, 6).Value = "Фото";
 
-                // Заполняем данными
                 for (int i = 0; i < products.Count; i++)
                 {
                     worksheet.Cell(i + 2, 1).Value = products[i].ProductID;
@@ -450,7 +570,6 @@ namespace Castle.UserFolder
                     worksheet.Cell(i + 2, 6).Value = products[i].PhotoID;
                 }
 
-                // Сохраняем файл
                 workbook.SaveAs(filePath);
             }
         }
@@ -468,7 +587,6 @@ namespace Castle.UserFolder
             {
                 ExportProductsToExcel(saveFileDialog.FileName);
 
-                // Логируем экспорт
                 Logger.LogAction(
                     $"Экспортированы данные товаров в Excel пользователем (ID: {App.CurrentUserId})",
                     App.CurrentUserId,

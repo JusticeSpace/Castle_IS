@@ -20,6 +20,7 @@ namespace Castle
             this.Logs = new HashSet<Logs>();
         }
     
+        public int IdUser { get; set; }
         public string UserName { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }
@@ -28,7 +29,6 @@ namespace Castle
         public string Password { get; set; }
         public string Login { get; set; }
         public Nullable<int> PhotoID { get; set; }
-        public int IdUser { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Logs> Logs { get; set; }

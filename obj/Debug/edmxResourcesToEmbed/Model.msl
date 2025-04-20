@@ -42,11 +42,21 @@
     <EntitySetMapping Name="Logs">
       <EntityTypeMapping TypeName="Amo_CastleModel.Logs">
         <MappingFragment StoreEntitySet="Logs">
+          <ScalarProperty Name="Details" ColumnName="Details" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Action" ColumnName="Action" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="Details" ColumnName="Details" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="Amo_CastleModel.Orders">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="SuppliersID" ColumnName="SuppliersID" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="ExpectedDelivery" ColumnName="ExpectedDelivery" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -114,6 +124,7 @@
     <EntitySetMapping Name="User">
       <EntityTypeMapping TypeName="Amo_CastleModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Surname" ColumnName="Surname" />
           <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
@@ -122,7 +133,6 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Login" ColumnName="Login" />
           <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
-          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

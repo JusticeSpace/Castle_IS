@@ -125,3 +125,5 @@ C:\ST\Castle_\Castle_IS\obj\Debug\Administrator\ULogs.g.cs
 C:\ST\Castle_\Castle_IS\obj\Debug\Administrator\ULogs.baml
 C:\ST\Castle_\Castle_IS\obj\Debug\Administrator\AdWorkers.g.cs
 C:\ST\Castle_\Castle_IS\obj\Debug\Administrator\AdWorkers.baml
+C:\ST\Castle_\Castle_IS\obj\Debug\UserFolder\SupplierDetails.baml
+C:\ST\Castle_\Castle_IS\obj\Debug\UserFolder\SupplierDetails.g.cs
