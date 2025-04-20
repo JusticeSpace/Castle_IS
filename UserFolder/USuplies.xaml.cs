@@ -49,6 +49,10 @@ namespace Castle.UserFolder
             var editingCategoriesViewSource = (CollectionViewSource)FindResource("EditingCategoriesViewSource");
             editingCategoriesViewSource.Source = _context.Categories.Local;
 
+            // Настройка ComboBox для удаления категорий (исключаем "Все товары")
+            var deleteCategoriesList = _context.Categories.Local.ToList();
+            DeleteCategoryComboBox.ItemsSource = deleteCategoriesList;
+
             var suppliersViewSource = (CollectionViewSource)FindResource("SuppliersViewSource");
             var suppliersList = _context.Suppliers.Local.OrderBy(s => s.SupplierName).ToList();
             suppliersViewSource.Source = suppliersList;
@@ -78,6 +82,14 @@ namespace Castle.UserFolder
                 }
                 _context.Product.Remove(product);
                 _context.SaveChanges();
+
+                // Логируем удаление
+                Logger.LogAction(
+                    $"Удалён товар: {product.ProductName} (ID: {product.ProductID}) пользователем (ID: {App.CurrentUserId})",
+                    App.CurrentUserId,
+                    $"Категория: {product.Categories?.CategoryName ?? "не указана"}"
+                );
+
                 RefreshData();
             }
         }
@@ -92,11 +104,103 @@ namespace Castle.UserFolder
                     MessageBox.Show("Цена не может быть отрицательной!", "Ошибка", MessageBoxButton.OK,
                         MessageBoxImage.Warning);
                     e.Cancel = true;
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(product.ProductName))
+                {
+                    MessageBox.Show("Название товара не может быть пустым!", "Ошибка", MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                    e.Cancel = true;
+                    return;
+                }
+                if (product.Quantity < 0)
+                {
+                    MessageBox.Show("Количество не может быть отрицательным!", "Ошибка", MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                    e.Cancel = true;
+                    return;
+                }
+
+                // Проверяем, что CategoryID ссылается на существующую категорию
+                if (!_context.Categories.Any(c => c.CategoryID == product.CategoryID))
+                {
+                    MessageBox.Show("Выбранная категория не существует!", "Ошибка", MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                    e.Cancel = true;
+                    return;
+                }
+
+                // Проверяем, что SuppliersID ссылается на существующего поставщика (если указано)
+                // Предполагаем, что SuppliersID = 0 означает "не указано"
+                if (product.SuppliersID != 0 && !_context.Suppliers.Any(s => s.SuppliersID == product.SuppliersID))
+                {
+                    MessageBox.Show("Выбранный поставщик не существует!", "Ошибка", MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                    e.Cancel = true;
+                    return;
+                }
+
+                // Сохраняем оригинальные значения для логирования изменений
+                var originalProduct = _context.Entry(product).OriginalValues.ToObject() as Product;
+                try
+                {
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при сохранении изменений: {ex.Message}", "Ошибка", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                    e.Cancel = true;
+                    return;
+                }
+
+                // Формируем подробности изменений
+                string changes = "";
+                if (originalProduct.ProductName != product.ProductName)
+                {
+                    changes += $"Название изменено с '{originalProduct.ProductName}' на '{product.ProductName}'. ";
+                }
+                if (originalProduct.Price != product.Price)
+                {
+                    changes += $"Цена изменена с '{originalProduct.Price}' на '{product.Price}'. ";
+                }
+                if (originalProduct.Quantity != product.Quantity)
+                {
+                    changes += $"Количество изменено с '{originalProduct.Quantity}' на '{product.Quantity}'. ";
+                }
+                if (originalProduct.CategoryID != product.CategoryID)
+                {
+                    var oldCategoryName = _context.Categories.FirstOrDefault(c => c.CategoryID == originalProduct.CategoryID)?.CategoryName ?? "не указана";
+                    var newCategoryName = _context.Categories.FirstOrDefault(c => c.CategoryID == product.CategoryID)?.CategoryName ?? "не указана";
+                    changes += $"Категория изменена с '{oldCategoryName}' на '{newCategoryName}'. ";
+                }
+                if (originalProduct.SuppliersID != product.SuppliersID)
+                {
+                    var oldSupplierName = _context.Suppliers.FirstOrDefault(s => s.SuppliersID == originalProduct.SuppliersID)?.SupplierName ?? "не указан";
+                    var newSupplierName = _context.Suppliers.FirstOrDefault(s => s.SuppliersID == product.SuppliersID)?.SupplierName ?? "не указан";
+                    changes += $"Поставщик изменён с '{oldSupplierName}' на '{newSupplierName}'. ";
+                }
+                if (originalProduct.Comment != product.Comment)
+                {
+                    changes += $"Комментарий изменён с '{originalProduct.Comment ?? "не указан"}' на '{product.Comment ?? "не указан"}'. ";
+                }
+
+                // Логируем изменения
+                if (!string.IsNullOrEmpty(changes))
+                {
+                    Logger.LogAction(
+                        $"Отредактирован товар: {product.ProductName} (ID: {product.ProductID}) пользователем (ID: {App.CurrentUserId})",
+                        App.CurrentUserId,
+                        changes.Trim()
+                    );
                 }
                 else
                 {
-                    _context.SaveChanges(); 
-                                            
+                    Logger.LogAction(
+                        $"Отредактирован товар: {product.ProductName} (ID: {product.ProductID}) пользователем (ID: {App.CurrentUserId})",
+                        App.CurrentUserId,
+                        "Изменения отсутствуют"
+                    );
                 }
             }
         }
@@ -146,6 +250,21 @@ namespace Castle.UserFolder
                 .Include(p => p.Photos)
                 .Load();
             _productViewSource.Source = _context.Product.Local;
+
+            // Обновляем список категорий
+            var categoriesViewSource = (CollectionViewSource)FindResource("CategoriesViewSource");
+            var categoriesList = _context.Categories.Local.ToList();
+            var allCategories = new Categories { CategoryID = -1, CategoryName = "Все товары" };
+            categoriesList.Insert(0, allCategories);
+            categoriesViewSource.Source = categoriesList;
+
+            var editingCategoriesViewSource = (CollectionViewSource)FindResource("EditingCategoriesViewSource");
+            editingCategoriesViewSource.Source = _context.Categories.Local;
+
+            // Обновляем список категорий для удаления (исключаем "Все товары")
+            var deleteCategoriesList = _context.Categories.Local.ToList();
+            DeleteCategoryComboBox.ItemsSource = deleteCategoriesList;
+
             DGProduct.Items.Refresh();
         }
 
@@ -155,6 +274,108 @@ namespace Castle.UserFolder
             addProductWindow.Owner = Window.GetWindow(this);
             addProductWindow.ShowDialog();
             RefreshData();
+        }
+
+        private void AddCategory_Click(object sender, RoutedEventArgs e)
+        {
+            var categoryName = CategoryNameTextBox.Text?.Trim();
+            if (string.IsNullOrWhiteSpace(categoryName))
+            {
+                MessageBox.Show("Название категории не может быть пустым!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            try
+            {
+                // Проверяем, не существует ли уже категория с таким названием
+                if (_context.Categories.Any(c => c.CategoryName == categoryName))
+                {
+                    MessageBox.Show("Категория с таким названием уже существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                // Добавляем новую категорию
+                var newCategory = new Categories
+                {
+                    CategoryName = categoryName
+                    // Не устанавливаем CategoryID вручную, так как это IDENTITY
+                };
+                _context.Categories.Add(newCategory);
+                _context.SaveChanges();
+
+                // Логируем добавление категории
+                Logger.LogAction(
+                    $"Добавлена категория: {newCategory.CategoryName} (ID: {newCategory.CategoryID}) пользователем (ID: {App.CurrentUserId})",
+                    App.CurrentUserId,
+                    "Категория успешно добавлена"
+                );
+
+                // Очищаем TextBox
+                CategoryNameTextBox.Text = string.Empty;
+
+                // Обновляем данные
+                RefreshData();
+                MessageBox.Show("Категория успешно добавлена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при добавлении категории: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DeleteCategory_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedCategory = DeleteCategoryComboBox.SelectedItem as Categories;
+            if (selectedCategory == null)
+            {
+                MessageBox.Show("Выберите категорию для удаления!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Проверяем, не является ли это "Все товары"
+            if (selectedCategory.CategoryID == -1)
+            {
+                MessageBox.Show("Нельзя удалить категорию 'Все товары'!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Проверяем, используется ли категория в товарах
+            if (_context.Product.Any(p => p.CategoryID == selectedCategory.CategoryID))
+            {
+                MessageBox.Show("Эта категория используется в товарах. Удалите или измените категорию у товаров перед удалением!",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (MessageBox.Show($"Вы уверены, что хотите удалить категорию '{selectedCategory.CategoryName}'?",
+                "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    // Удаляем категорию
+                    if (_context.Entry(selectedCategory).State == EntityState.Detached)
+                    {
+                        _context.Categories.Attach(selectedCategory);
+                    }
+                    _context.Categories.Remove(selectedCategory);
+                    _context.SaveChanges();
+
+                    // Логируем удаление категории
+                    Logger.LogAction(
+                        $"Удалена категория: {selectedCategory.CategoryName} (ID: {selectedCategory.CategoryID}) пользователем (ID: {App.CurrentUserId})",
+                        App.CurrentUserId,
+                        "Категория успешно удалена"
+                    );
+
+                    // Обновляем данные
+                    RefreshData();
+                    MessageBox.Show("Категория успешно удалена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при удалении категории: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void ChangePhoto_Click(object sender, RoutedEventArgs e)
@@ -186,6 +407,14 @@ namespace Castle.UserFolder
                     }
 
                     _context.SaveChanges();
+
+                    // Логируем изменение фото
+                    Logger.LogAction(
+                        $"Изменено фото товара: {product.ProductName} (ID: {product.ProductID}) пользователем (ID: {App.CurrentUserId})",
+                        App.CurrentUserId,
+                        "Фото обновлено"
+                    );
+
                     RefreshData();
                 }
                 catch (Exception ex)
@@ -238,10 +467,18 @@ namespace Castle.UserFolder
             if (saveFileDialog.ShowDialog() == true)
             {
                 ExportProductsToExcel(saveFileDialog.FileName);
+
+                // Логируем экспорт
+                Logger.LogAction(
+                    $"Экспортированы данные товаров в Excel пользователем (ID: {App.CurrentUserId})",
+                    App.CurrentUserId,
+                    "Экспорт завершён"
+                );
+
                 MessageBox.Show("Экспорт товаров завершён!");
             }
         }
-            
+
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             RefreshData();

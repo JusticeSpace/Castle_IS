@@ -94,7 +94,7 @@ namespace Castle.Administrator
 
         private void Workers_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new UWorkers());
+            MainFrame.Navigate(new AdWorkers());
             IsProfileSelected = false;
             IsGoodsSelected = false;
             IsWorkersSelected = true;

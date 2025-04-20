@@ -149,9 +149,9 @@
             <TextBlock Text="Работники" Grid.Row="3"
                        FontFamily="Fonts/#Roboto Bold Italic"
                        Foreground="#00B4D8"
-                       FontSize="30"
-                       VerticalAlignment="Bottom"
-                       HorizontalAlignment="Center"/>
+                       FontSize="28"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Center" Margin="0,99,0,0" Width="140"/>
 
             <!-- Кнопка "Журнал изменений" -->
             <Button Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Logs_Click" Width="90" Height="90">

@@ -123,6 +123,9 @@
     <Compile Include="Administrator\AdWindow.xaml.cs">
       <DependentUpon>AdWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Administrator\AdWorkers.xaml.cs">
+      <DependentUpon>AdWorkers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Administrator\ULogs.xaml.cs">
       <DependentUpon>ULogs.xaml</DependentUpon>
     </Compile>
@@ -178,6 +181,7 @@
     <Compile Include="SomeCode\ClassMB.cs" />
     <Compile Include="SomeCode\Converter.cs" />
     <Compile Include="SomeCode\NavigationHelper.cs" />
+    <Compile Include="SomeCode\NullToVisibilityConverter.cs" />
     <Compile Include="SomeCode\PriceConverter.cs" />
     <Compile Include="SomeCode\Suplier.cs" />
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
@@ -217,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Resource Include="Dictionary1.xaml" />
+    <Page Include="Administrator\AdWorkers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Administrator\ULogs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

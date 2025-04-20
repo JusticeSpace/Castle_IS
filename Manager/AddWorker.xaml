@@ -5,78 +5,110 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Добавить работника" Height="600" Width="500">
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid Margin="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        Title="Добавить работника" Height="600" Width="600">
+    <Grid>
+        <!-- Градиентный фон -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#E6F0FA" Offset="0"/>
+                <GradientStop Color="#F5F9FF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="20" MaxWidth="500">
+                <!-- Заголовок -->
+                <TextBlock Text="Добавить работника" FontSize="24" FontWeight="Bold" Foreground="#00B4D8" 
+                           HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-            <!-- Логин -->
-            <TextBox Grid.Row="0" materialDesign:HintAssist.Hint="Логин" 
-                     Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" 
-                     Margin="0,10" FontSize="16"/>
+                <!-- Основная информация -->
+                <materialDesign:Card Padding="20" Margin="0,0,0,20" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                            <!-- Логин -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <materialDesign:PackIcon Kind="Account" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBox materialDesign:HintAssist.Hint="Логин" 
+                                         Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" 
+                                         FontSize="16" Width="200"/>
+                            </StackPanel>
+                            <!-- Пароль -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <materialDesign:PackIcon Kind="Lock" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBox materialDesign:HintAssist.Hint="Пароль" 
+                                         Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" 
+                                         FontSize="16" Width="200"/>
+                            </StackPanel>
+                            <!-- Фамилия -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <materialDesign:PackIcon Kind="AccountOutline" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBox materialDesign:HintAssist.Hint="Фамилия" 
+                                         Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" 
+                                         FontSize="16" Width="200"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <!-- Имя -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <materialDesign:PackIcon Kind="AccountOutline" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBox materialDesign:HintAssist.Hint="Имя" 
+                                         Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" 
+                                         FontSize="16" Width="200"/>
+                            </StackPanel>
+                            <!-- Отчество -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <materialDesign:PackIcon Kind="AccountOutline" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBox materialDesign:HintAssist.Hint="Отчество (необязательно)" 
+                                         Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" 
+                                         FontSize="16" Width="200"/>
+                            </StackPanel>
+                            <!-- Электронная почта -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <materialDesign:PackIcon Kind="Email" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBox materialDesign:HintAssist.Hint="Эл. почта (необяз.)" 
+                                         Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
+                                         FontSize="16" Width="200"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:Card>
 
-            <!-- Пароль -->
-            <TextBox Grid.Row="1" materialDesign:HintAssist.Hint="Пароль" 
-                     Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" 
-                     Margin="0,10" FontSize="16"/>
+                <!-- Роль -->
+                <materialDesign:Card Padding="20" Margin="0,0,0,20" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ShieldAccount" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                        <ComboBox materialDesign:HintAssist.Hint="Роль" 
+                                  x:Name="RoleComboBox" FontSize="16" Width="200"
+                                  DisplayMemberPath="RoleName" SelectedValuePath="RoleID"
+                                  SelectedValue="{Binding RoleID, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </materialDesign:Card>
 
-            <!-- Фамилия -->
-            <TextBox Grid.Row="2" materialDesign:HintAssist.Hint="Фамилия" 
-                     Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" 
-                     Margin="0,10" FontSize="16"/>
+                <!-- Фото -->
+                <materialDesign:Card Padding="20" Margin="0,0,0,20" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    <StackPanel HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <materialDesign:PackIcon Kind="Image" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                            <TextBlock Text="Фото работника" FontSize="16" FontWeight="Bold"/>
+                        </StackPanel>
+                        <Button Content="Загрузить фото" Click="UploadPhoto_Click" 
+                                Style="{StaticResource MaterialDesignFlatButton}" x:Name="LoadImageButton"/>
+                        <TextBlock Text="Фото не выбрано" x:Name="ImageStatusText" HorizontalAlignment="Center" Margin="0,10,0,10" 
+                                   Foreground="Gray" FontStyle="Italic"/>
+                        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="10" ClipToBounds="True">
+                            <Image x:Name="WorkerImage" Width="150" Height="150" Stretch="Uniform" Visibility="Collapsed"/>
+                        </Border>
+                    </StackPanel>
+                </materialDesign:Card>
 
-            <!-- Имя -->
-            <TextBox Grid.Row="3" materialDesign:HintAssist.Hint="Имя" 
-                     Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" 
-                     Margin="0,10" FontSize="16"/>
-
-            <!-- Отчество -->
-            <TextBox Grid.Row="4" materialDesign:HintAssist.Hint="Отчество (необязательно)" 
-                     Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" 
-                     Margin="0,10" FontSize="16"/>
-
-            <!-- Электронная почта -->
-            <TextBox Grid.Row="5" materialDesign:HintAssist.Hint="Электронная почта (необязательно)" 
-                     Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
-                     Margin="0,10" FontSize="16"/>
-
-            <!-- Роль -->
-            <ComboBox Grid.Row="6" materialDesign:HintAssist.Hint="Роль" 
-                      x:Name="RoleComboBox" Margin="0,10,0,20" FontSize="16"
-                      DisplayMemberPath="RoleName" SelectedValuePath="RoleID"
-                      SelectedValue="{Binding RoleID, UpdateSourceTrigger=PropertyChanged}"/>
-
-            <!-- Фото -->
-            <Grid Grid.Row="7" Margin="0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center">
-                    <Button Content="Загрузить фото" Click="UploadPhoto_Click" 
-                            Style="{StaticResource MaterialDesignFlatButton}" x:Name="LoadImageButton"/>
-                    <TextBlock Text="Фото не выбрано" x:Name="ImageStatusText" HorizontalAlignment="Center" Margin="0,5,0,0" 
-                               Foreground="Gray" FontStyle="Italic"/>
-                    <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Margin="0,5,0,0">
-                        <Image x:Name="WorkerImage" Width="100" Height="100" Stretch="Uniform" Visibility="Collapsed"/>
-                    </Border>
-                </StackPanel>
-            </Grid>
-
-            <!-- Кнопка сохранения -->
-            <Button Grid.Row="8" Content="Сохранить" Click="Save_Click" 
-                    Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,150,0,0" 
-                    Width="150" Height="40" HorizontalAlignment="Center"/>
-        </Grid>
-    </ScrollViewer>
+                <!-- Кнопка сохранения -->
+                <Button Content="Сохранить" Click="Save_Click" 
+                        Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,20,0,0" 
+                        Width="150" Height="40" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </Window>

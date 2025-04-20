@@ -8,123 +8,151 @@
       mc:Ignorable="d" 
       d:DesignHeight="1040" d:DesignWidth="1780" 
       Title="Профиль пользователя">
-
     <Page.Resources>
         <local:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter"/>
+        <local:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
         <Style x:Key="LabelStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Roboto Italic"/>
             <Setter Property="Foreground" Value="#00B4D8"/>
-            <Setter Property="Margin" Value="0,5,10,5"/>
+            <Setter Property="Margin" Value="0,8,10,8"/>
         </Style>
         <Style x:Key="InputStyle" TargetType="TextBox">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Roboto Regular"/>
-            <Setter Property="Margin" Value="0,5,0,5"/>
+            <Setter Property="Margin" Value="0,8,0,8"/>
+            <Setter Property="Width" Value="250"/>
         </Style>
         <Style x:Key="StaticTextStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Roboto Regular"/>
-            <Setter Property="Margin" Value="0,5,0,5"/>
+            <Setter Property="Margin" Value="0,8,0,8"/>
+        </Style>
+        <Style x:Key="ImageStatusTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Opacity" Value="0.8"/>
         </Style>
     </Page.Resources>
-
-    <Grid Margin="10">
+    <Grid>
+        <!-- Градиентный фон -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#CAF0F8" Offset="0"/>
+                <GradientStop Color="#E0F7FF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
         <!-- Заголовок -->
         <TextBlock Text="Профиль пользователя" 
-                   FontSize="36" 
+                   FontSize="40" 
                    FontFamily="pack://application:,,,/Fonts/#Roboto Bold Italic" 
                    Foreground="#00B4D8" 
                    HorizontalAlignment="Center" 
-                   Margin="0,0,0,10"/>
-
+                   Margin="0,20,0,20"
+                   Grid.Row="0"/>
         <!-- Основное содержимое -->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="900">
             <!-- Фото пользователя -->
-            <materialDesign:Card Grid.Column="0" Margin="0,0,10,0" Padding="10">
+            <materialDesign:Card Padding="15" Margin="0,0,0,30" 
+                                 materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                 HorizontalAlignment="Center">
                 <StackPanel>
-                    <Border CornerRadius="50" Width="80" Height="80" BorderBrush="#00B4D8" BorderThickness="2">
+                    <Border CornerRadius="90" Width="180" Height="180" Background="White" ClipToBounds="True">
                         <Grid>
-                            <Image x:Name="UserImage" Stretch="UniformToFill"/>
+                            <Image x:Name="UserImage" Stretch="Uniform"/>
                             <TextBlock x:Name="ImageStatusText" 
                                        Text="Нет фото" 
-                                       FontSize="12" 
-                                       Foreground="Gray" 
-                                       HorizontalAlignment="Center" 
-                                       VerticalAlignment="Center" 
-                                       Visibility="Visible"/>
+                                       Style="{StaticResource ImageStatusTextStyle}"
+                                       Visibility="{Binding ElementName=UserImage, Path=Source, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=VisibleWhenNull}"/>
                         </Grid>
                     </Border>
                     <Button Content="Загрузить фото" 
                             Click="UploadPhoto_Click" 
                             Style="{StaticResource MaterialDesignFlatButton}" 
-                            Margin="0,5,0,0" 
-                            FontSize="12"
+                            Margin="0,15,0,0" 
+                            FontSize="16"
                             HorizontalAlignment="Center"/>
                 </StackPanel>
             </materialDesign:Card>
-
             <!-- Форма -->
-            <materialDesign:Card Grid.Column="1" Padding="15">
+            <materialDesign:Card Padding="30" Margin="0,0,0,20"
+                                 materialDesign:ShadowAssist.ShadowDepth="Depth2">
                 <StackPanel>
-                    <TextBlock Text="Информация о профиле" FontSize="24" FontFamily="pack://application:,,,/Fonts/#Roboto Bold Italic" Foreground="#00B4D8" Margin="0,0,0,5"/>
-                    <Separator Background="#00B4D8" Height="1" Margin="0,0,0,5"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="ID пользователя" Style="{StaticResource LabelStyle}"/>
-                        <TextBlock Text="{Binding IdUser}" Style="{StaticResource StaticTextStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Логин" Style="{StaticResource LabelStyle}"/>
-                        <TextBlock Text="{Binding Login}" Style="{StaticResource StaticTextStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Роль" Style="{StaticResource LabelStyle}"/>
-                        <TextBlock Text="{Binding Roles.RoleName}" Style="{StaticResource StaticTextStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Имя" Style="{StaticResource LabelStyle}"/>
-                        <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Фамилия" Style="{StaticResource LabelStyle}"/>
-                        <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Отчество" Style="{StaticResource LabelStyle}"/>
-                        <TextBox Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Электронная почта" Style="{StaticResource LabelStyle}"/>
-                        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
-                    </StackPanel>
+                    <TextBlock Text="Информация о профиле" 
+                               FontSize="28" 
+                               FontFamily="pack://application:,,,/Fonts/#Roboto Bold Italic" 
+                               Foreground="#00B4D8" 
+                               Margin="0,0,0,20"
+                               HorizontalAlignment="Center"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Identifier" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBlock Text="ID пользователя:" Style="{StaticResource LabelStyle}"/>
+                                <TextBlock Text="{Binding IdUser}" Style="{StaticResource StaticTextStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Account" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBlock Text="Логин:" Style="{StaticResource LabelStyle}"/>
+                                <TextBlock Text="{Binding Login}" Style="{StaticResource StaticTextStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="ShieldAccount" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBlock Text="Роль:" Style="{StaticResource LabelStyle}"/>
+                                <TextBlock Text="{Binding Roles.RoleName}" Style="{StaticResource StaticTextStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="AccountOutline" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBlock Text="Имя:" Style="{StaticResource LabelStyle}"/>
+                                <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="AccountOutline" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBlock Text="Фамилия:" Style="{StaticResource LabelStyle}"/>
+                                <TextBox Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="AccountOutline" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBlock Text="Отчество:" Style="{StaticResource LabelStyle}"/>
+                                <TextBox Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Email" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBlock Text="Эл. почта:" Style="{StaticResource LabelStyle}"/>
+                                <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource InputStyle}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
             </materialDesign:Card>
-        </Grid>
-
+        </StackPanel>
         <!-- Кнопки -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,30,30">
             <Button Content="Сменить пароль" 
                     Click="ChangePassword_Click" 
                     Style="{StaticResource MaterialDesignRaisedButton}" 
-                    Width="180" Height="40" 
-                    FontSize="16" 
-                    Margin="0,0,10,0"/>
+                    Width="200" Height="50" 
+                    FontSize="18" 
+                    Margin="0,0,15,0"/>
             <Button Content="Сохранить изменения" 
                     Click="SaveChanges_Click" 
                     Style="{StaticResource MaterialDesignRaisedButton}" 
-                    Width="180" Height="40" 
-                    FontSize="16"/>
+                    Width="200" Height="50" 
+                    FontSize="18"/>
         </StackPanel>
     </Grid>
 </Page>

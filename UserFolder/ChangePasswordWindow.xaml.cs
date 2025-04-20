@@ -20,6 +20,12 @@ namespace Castle.UserFolder
             _isOldPasswordVisible = false;
         }
 
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)  // RoutedEventArgs вместо RoutedEvent
+        {
+            this.Close();
+        }
+
         private void ToggleOldPasswordVisibility_Click(object sender, RoutedEventArgs e)
         {
             _isOldPasswordVisible = !_isOldPasswordVisible;

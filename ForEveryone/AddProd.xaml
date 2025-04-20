@@ -5,101 +5,133 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Добавить товар" Height="600" Width="500">
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid Margin="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        Title="Добавить товар" Height="600" Width="600">
+    <Grid>
+        <!-- Градиентный фон -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#E6F0FA" Offset="0"/>
+                <GradientStop Color="#F5F9FF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="20" MaxWidth="500">
+                <!-- Заголовок -->
+                <TextBlock Text="Добавить товар" FontSize="24" FontWeight="Bold" Foreground="#00B4D8" 
+                           HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-            <!-- Название товара -->
-            <TextBox Grid.Row="0" materialDesign:HintAssist.Hint="Название товара" 
-                     Text="{Binding ProductName, UpdateSourceTrigger=PropertyChanged}" 
-                     Margin="0,10" FontSize="16"/>
+                <!-- Основная информация -->
+                <materialDesign:Card Padding="20" Margin="0,0,0,20" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                            <!-- Название товара -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <materialDesign:PackIcon Kind="Label" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <TextBox materialDesign:HintAssist.Hint="Название товара" 
+                                         Text="{Binding ProductName, UpdateSourceTrigger=PropertyChanged}" 
+                                         FontSize="16" Width="200"/>
+                            </StackPanel>
+                            <!-- Цена -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <materialDesign:PackIcon Kind="CurrencyUsd" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <Grid>
+                                    <TextBox x:Name="PriceTextBox" 
+                                             Text="" 
+                                             FontSize="16" 
+                                             Width="200"
+                                             GotFocus="PriceTextBox_GotFocus" 
+                                             LostFocus="PriceTextBox_LostFocus" 
+                                             TextChanged="PriceTextBox_TextChanged"/>
+                                    <TextBlock x:Name="PriceHint" 
+                                               Text="Цена" 
+                                               FontSize="16" 
+                                               Foreground="Gray" 
+                                               IsHitTestVisible="False" 
+                                               Margin="5,0,0,0" 
+                                               Visibility="Visible"/>
+                                </Grid>
+                            </StackPanel>
+                            <!-- Количество -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <materialDesign:PackIcon Kind="Counter" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <Grid>
+                                    <TextBox x:Name="QuantityTextBox" 
+                                             Text="" 
+                                             FontSize="16" 
+                                             Width="200"
+                                             GotFocus="QuantityTextBox_GotFocus" 
+                                             LostFocus="QuantityTextBox_LostFocus" 
+                                             TextChanged="QuantityTextBox_TextChanged"/>
+                                    <TextBlock x:Name="QuantityHint" 
+                                               Text="Количество" 
+                                               FontSize="16" 
+                                               Foreground="Gray" 
+                                               IsHitTestVisible="False" 
+                                               Margin="5,0,0,0" 
+                                               Visibility="Visible"/>
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <!-- Категория -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <materialDesign:PackIcon Kind="Category" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <ComboBox materialDesign:HintAssist.Hint="Категория" 
+                                          x:Name="CategoryComboBox" FontSize="16" Width="200"
+                                          DisplayMemberPath="CategoryName" SelectedValuePath="CategoryID"
+                                          SelectedValue="{Binding CategoryID, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <!-- Поставщик -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <materialDesign:PackIcon Kind="Truck" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                                <ComboBox materialDesign:HintAssist.Hint="Поставщик" 
+                                          x:Name="SupplierComboBox" FontSize="16" Width="200"
+                                          DisplayMemberPath="SupplierName" SelectedValuePath="SupplierID"
+                                          SelectedValue="{Binding SupplierID, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:Card>
 
-            <!-- Цена -->
-            <Grid Grid.Row="1" Margin="0,10">
-                <TextBox x:Name="PriceTextBox" 
-                         Text="" 
-                         FontSize="16" 
-                         GotFocus="PriceTextBox_GotFocus" 
-                         LostFocus="PriceTextBox_LostFocus" 
-                         TextChanged="PriceTextBox_TextChanged"/>
-                <TextBlock x:Name="PriceHint" 
-                           Text="Цена" 
-                           FontSize="16" 
-                           Foreground="Gray" 
-                           IsHitTestVisible="False" 
-                           Margin="5,0,0,0" 
-                           Visibility="Visible"/>
-            </Grid>
+                <!-- Комментарий -->
+                <materialDesign:Card Padding="20" Margin="0,0,0,20" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <materialDesign:PackIcon Kind="Comment" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                            <TextBlock Text="Комментарий" FontSize="16" FontWeight="Bold"/>
+                        </StackPanel>
+                        <TextBox materialDesign:HintAssist.Hint="(необязательно)" 
+                                 Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" 
+                                 FontSize="16" TextWrapping="Wrap" AcceptsReturn="True" Height="80"/>
+                    </StackPanel>
+                </materialDesign:Card>
 
-            <!-- Количество -->
-            <Grid Grid.Row="2" Margin="0,10">
-                <TextBox x:Name="QuantityTextBox" 
-                         Text="" 
-                         FontSize="16" 
-                         GotFocus="QuantityTextBox_GotFocus" 
-                         LostFocus="QuantityTextBox_LostFocus" 
-                         TextChanged="QuantityTextBox_TextChanged"/>
-                <TextBlock x:Name="QuantityHint" 
-                           Text="Количество" 
-                           FontSize="16" 
-                           Foreground="Gray" 
-                           IsHitTestVisible="False" 
-                           Margin="5,0,0,0" 
-                           Visibility="Visible"/>
-            </Grid>
+                <!-- Фото -->
+                <materialDesign:Card Padding="20" Margin="0,0,0,20" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                    <StackPanel HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <materialDesign:PackIcon Kind="Image" Margin="0,0,10,0" Foreground="#00B4D8" VerticalAlignment="Center"/>
+                            <TextBlock Text="Фото товара" FontSize="16" FontWeight="Bold"/>
+                        </StackPanel>
+                        <Button Content="Загрузить фото" Click="UploadPhoto_Click" 
+                                Style="{StaticResource MaterialDesignFlatButton}" x:Name="LoadImageButton"/>
+                        <TextBlock Text="Фото не выбрано" x:Name="ImageStatusText" HorizontalAlignment="Center" Margin="0,10,0,10" 
+                                   Foreground="Gray" FontStyle="Italic"/>
+                        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="10" ClipToBounds="True">
+                            <Image x:Name="ProductImage" Width="150" Height="150" Stretch="Uniform" Visibility="Collapsed"/>
+                        </Border>
+                    </StackPanel>
+                </materialDesign:Card>
 
-            <!-- Категория -->
-            <ComboBox Grid.Row="3" materialDesign:HintAssist.Hint="Категория" 
-                      x:Name="CategoryComboBox" Margin="0,10" FontSize="16"
-                      DisplayMemberPath="CategoryName" SelectedValuePath="CategoryID"
-                      SelectedValue="{Binding CategoryID, UpdateSourceTrigger=PropertyChanged}"/>
-
-            <!-- Поставщик -->
-            <ComboBox Grid.Row="4" materialDesign:HintAssist.Hint="Поставщик" 
-                      x:Name="SupplierComboBox" Margin="0,10,0,20" FontSize="16"
-                      DisplayMemberPath="SupplierName" SelectedValuePath="SupplierID"
-                      SelectedValue="{Binding SupplierID, UpdateSourceTrigger=PropertyChanged}"/>
-
-            <!-- Комментарий -->
-            <StackPanel Grid.Row="5" Margin="0,20,0,10">
-                <TextBlock Text="Комментарий" FontSize="14" FontWeight="Bold"/>
-                <TextBox materialDesign:HintAssist.Hint="(необязательно)" 
-                         Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" 
-                         FontSize="16" TextWrapping="Wrap" AcceptsReturn="True" Height="80"/>
+                <!-- Кнопка сохранения -->
+                <Button Content="Сохранить" Click="Save_Click" 
+                        Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,20,0,0" 
+                        Width="150" Height="40" HorizontalAlignment="Center"/>
             </StackPanel>
-
-            <!-- Фото -->
-            <Grid Grid.Row="6" Margin="0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center">
-                    <Button Content="Загрузить фото" Click="UploadPhoto_Click" 
-                            Style="{StaticResource MaterialDesignFlatButton}" x:Name="LoadImageButton"/>
-                    <TextBlock Text="Фото не выбрано" x:Name="ImageStatusText" HorizontalAlignment="Center" Margin="0,5,0,0" 
-                               Foreground="Gray" FontStyle="Italic"/>
-                    <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Margin="0,5,0,0">
-                        <Image x:Name="ProductImage" Width="100" Height="100" Stretch="Uniform" Visibility="Collapsed"/>
-                    </Border>
-                </StackPanel>
-            </Grid>
-
-            <!-- Кнопка сохранения -->
-            <Button Grid.Row="7" Content="Сохранить" Click="Save_Click" 
-                    Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,20,0,0" 
-                    Width="150" Height="40" HorizontalAlignment="Center"/>
-        </Grid>
-    </ScrollViewer>
+        </ScrollViewer>
+    </Grid>
 </Window>
