@@ -84,14 +84,14 @@
     <Key>
       <PropertyRef Name="StreetID" />
     </Key>
-    <Property Name="StreetID" Type="int" Nullable="false" />
+    <Property Name="StreetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Street" Type="varchar" MaxLength="64" Nullable="false" />
   </EntityType>
   <EntityType Name="Suppliers">
     <Key>
       <PropertyRef Name="SuppliersID" />
     </Key>
-    <Property Name="SuppliersID" Type="int" Nullable="false" />
+    <Property Name="SuppliersID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SupplierName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="ContactPerson" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />

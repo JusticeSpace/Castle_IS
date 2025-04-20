@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="Castle.UserFolder.AddressSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="600">
+    <UserControl.Resources>
+        <FontFamily x:Key="RobotoItalic">pack://application:,,,/Fonts/#Roboto Italic</FontFamily>
+        <Style x:Key="MaterialComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
+            <Setter Property="FontFamily" Value="{StaticResource RobotoItalic}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#00B4D8"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Margin" Value="0,10,0,10"/>
+        </Style>
+        <Style x:Key="DetailLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource RobotoItalic}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,5,10,5"/>
+        </Style>
+    </UserControl.Resources>
+    <materialDesign:Card Padding="20" Margin="10">
+        <StackPanel>
+            <TextBlock Text="Выбор адреса" FontSize="20" FontFamily="{StaticResource RobotoItalic}"
+                       HorizontalAlignment="Center" Margin="0,0,0,20" Foreground="{StaticResource PrimaryHueMidBrush}"/>
+
+            <!-- Выбор страны -->
+            <TextBlock Text="Страна:" Style="{StaticResource DetailLabelStyle}"/>
+            <ComboBox x:Name="CountryComboBox" 
+          ItemsSource="{Binding Countries}" 
+          DisplayMemberPath="Country1" 
+          SelectedValuePath="CountryID"
+          SelectionChanged="CountryComboBox_SelectionChanged"
+          Style="{StaticResource MaterialComboBoxStyle}"/>
+
+            <!-- Выбор города -->
+            <TextBlock Text="Город:" Style="{StaticResource DetailLabelStyle}"/>
+            <ComboBox x:Name="CityComboBox" 
+          ItemsSource="{Binding Cities}" 
+          DisplayMemberPath="City1" 
+          SelectedValuePath="CityID"
+          SelectionChanged="CityComboBox_SelectionChanged"
+          Style="{StaticResource MaterialComboBoxStyle}"/>
+
+            <!-- Выбор улицы -->
+            <TextBlock Text="Улица:" Style="{StaticResource DetailLabelStyle}"/>
+            <ComboBox x:Name="StreetComboBox" 
+          ItemsSource="{Binding Streets}" 
+          DisplayMemberPath="Street1" 
+          SelectedValuePath="StreetID"
+          SelectionChanged="StreetComboBox_SelectionChanged"
+          Style="{StaticResource MaterialComboBoxStyle}"/>
+
+            <!-- Выбор дома -->
+            <TextBlock Text="Дом:" Style="{StaticResource DetailLabelStyle}"/>
+            <ComboBox x:Name="HouseComboBox" 
+                      ItemsSource="{Binding Houses}" 
+                      DisplayMemberPath="HouseNum"
+                      SelectedValuePath="AddressID"
+                      SelectionChanged="HouseComboBox_SelectionChanged"
+                      Style="{StaticResource MaterialComboBoxStyle}"
+                      IsEnabled="False"/>
+
+            <!-- Выбор корпуса -->
+            <TextBlock Text="Корпус:" Style="{StaticResource DetailLabelStyle}"/>
+            <ComboBox x:Name="BuildingComboBox" 
+                      ItemsSource="{Binding Buildings}" 
+                      DisplayMemberPath="Building"
+                      SelectedValuePath="AddressID"
+                      SelectionChanged="BuildingComboBox_SelectionChanged"
+                      Style="{StaticResource MaterialComboBoxStyle}"
+                      IsEnabled="False"/>
+
+            <!-- Выбор подъезда -->
+            <TextBlock Text="Подъезд:" Style="{StaticResource DetailLabelStyle}"/>
+            <ComboBox x:Name="EntranceComboBox" 
+                      ItemsSource="{Binding Entrances}" 
+                      DisplayMemberPath="Entrance"
+                      SelectedValuePath="AddressID"
+                      SelectionChanged="EntranceComboBox_SelectionChanged"
+                      Style="{StaticResource MaterialComboBoxStyle}"
+                      IsEnabled="False"/>
+
+            <!-- Выбор квартиры -->
+            <TextBlock Text="Квартира:" Style="{StaticResource DetailLabelStyle}"/>
+            <ComboBox x:Name="FlatComboBox" 
+                      ItemsSource="{Binding Flats}" 
+                      DisplayMemberPath="Flat"
+                      SelectedValuePath="AddressID"
+                      Style="{StaticResource MaterialComboBoxStyle}"
+                      IsEnabled="False"/>
+
+            <!-- Кнопки -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <Button Content="Выбрать" Click="SelectAddress_Click"
+                        Style="{StaticResource MaterialDesignRaisedButton}" Margin="0,0,10,0"/>
+                <Button Content="Отмена" Click="Cancel_Click"
+                        Style="{StaticResource MaterialDesignRaisedButton}"/>
+            </StackPanel>
+        </StackPanel>
+    </materialDesign:Card>
+</UserControl>

@@ -49,8 +49,8 @@
     <Property Name="Action" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="User" Relationship="Self.FK_Logs_Users" FromRole="Logs" ToRole="User" />
     <Property Name="Details" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Logs_Users" FromRole="Logs" ToRole="User" />
   </EntityType>
   <EntityType Name="Orders">
     <Key>
@@ -99,7 +99,7 @@
     <Key>
       <PropertyRef Name="StreetID" />
     </Key>
-    <Property Name="StreetID" Type="Int32" Nullable="false" />
+    <Property Name="StreetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Street1" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Address" Relationship="Self.FK__Address__StreetI__4E88ABD4" FromRole="Street" ToRole="Address" />
   </EntityType>
@@ -107,7 +107,7 @@
     <Key>
       <PropertyRef Name="SuppliersID" />
     </Key>
-    <Property Name="SuppliersID" Type="Int32" Nullable="false" />
+    <Property Name="SuppliersID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -131,7 +131,7 @@
     <Key>
       <PropertyRef Name="IdUser" />
     </Key>
-    <Property Name="IdUser" Type="Int32" Nullable="false" />
+    <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -205,7 +205,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Logs_Users">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">

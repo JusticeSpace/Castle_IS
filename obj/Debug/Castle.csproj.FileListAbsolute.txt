@@ -127,3 +127,5 @@ C:\ST\Castle_\Castle_IS\obj\Debug\Administrator\AdWorkers.g.cs
 C:\ST\Castle_\Castle_IS\obj\Debug\Administrator\AdWorkers.baml
 C:\ST\Castle_\Castle_IS\obj\Debug\UserFolder\SupplierDetails.baml
 C:\ST\Castle_\Castle_IS\obj\Debug\UserFolder\SupplierDetails.g.cs
+C:\ST\Castle_\Castle_IS\obj\Debug\UserFolder\AddressSelector.baml
+C:\ST\Castle_\Castle_IS\obj\Debug\UserFolder\AddressSelector.g.cs

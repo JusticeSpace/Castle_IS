@@ -17,6 +17,7 @@ namespace Castle.UserFolder
     {
         private Amo_CastleEntities1 _context;
         private CollectionViewSource _productViewSource;
+        private int? _selectedAddressID; // Переменная для хранения выбранного адреса
 
         public USuplies()
         {
@@ -373,35 +374,34 @@ namespace Castle.UserFolder
             }
         }
 
+        private void SelectAddress_Click(object sender, RoutedEventArgs e)
+        {
+            var addressSelector = new AddressSelector(_context);
+            DialogHost.Show(addressSelector, "AddressDialog", null, (dialogSender, args) =>
+            {
+                _selectedAddressID = addressSelector.SelectedAddressID;
+                if (_selectedAddressID.HasValue)
+                {
+                    SelectAddressButton.Content = $"Адрес ID: {_selectedAddressID}";
+                }
+                else
+                {
+                    SelectAddressButton.Content = "Выбрать адрес";
+                }
+            });
+        }
+
         private void AddSupplier_Click(object sender, RoutedEventArgs e)
         {
             var supplierName = SupplierNameTextBox.Text?.Trim();
             var contactPerson = ContactPersonTextBox.Text?.Trim();
             var phone = PhoneTextBox.Text?.Trim();
             var email = EmailTextBox.Text?.Trim();
-            var addressIdText = AddressTextBox.Text?.Trim();
 
             if (string.IsNullOrWhiteSpace(supplierName))
             {
                 MessageBox.Show("Название поставщика не может быть пустым!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
-            }
-
-            int? addressId = null;
-            if (!string.IsNullOrWhiteSpace(addressIdText))
-            {
-                if (!int.TryParse(addressIdText, out int parsedAddressId))
-                {
-                    MessageBox.Show("ID адреса должен быть числом!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-                addressId = parsedAddressId;
-
-                if (!_context.Address.Any(a => a.AddressID == addressId))
-                {
-                    MessageBox.Show("Указанный ID адреса не существует!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
             }
 
             try
@@ -418,7 +418,7 @@ namespace Castle.UserFolder
                     ContactPerson = string.IsNullOrWhiteSpace(contactPerson) ? null : contactPerson,
                     Phone = string.IsNullOrWhiteSpace(phone) ? null : phone,
                     Email = string.IsNullOrWhiteSpace(email) ? null : email,
-                    AddressID = addressId
+                    AddressID = _selectedAddressID
                 };
                 _context.Suppliers.Add(newSupplier);
                 _context.SaveChanges();
@@ -433,7 +433,8 @@ namespace Castle.UserFolder
                 ContactPersonTextBox.Text = string.Empty;
                 PhoneTextBox.Text = string.Empty;
                 EmailTextBox.Text = string.Empty;
-                AddressTextBox.Text = string.Empty;
+                _selectedAddressID = null;
+                SelectAddressButton.Content = "Выбрать адрес";
 
                 RefreshData();
                 MessageBox.Show("Поставщик успешно добавлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);

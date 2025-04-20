@@ -54,9 +54,9 @@
                 <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource DetailValueStyle}">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0}, {1}, {2}, д. {3}, корп. {4}, кв. {5}">
-                            <Binding Path="Address.Country.Country" FallbackValue="Не указано"/>
-                            <Binding Path="Address.City.City" FallbackValue="Не указано"/>
-                            <Binding Path="Address.Street.Street" FallbackValue="Не указано"/>
+                            <Binding Path="Address.Country.Country1" FallbackValue="Не указано"/>
+                            <Binding Path="Address.City.City1" FallbackValue="Не указано"/>
+                            <Binding Path="Address.Street.Street1" FallbackValue="Не указано"/>
                             <Binding Path="Address.HouseNum" FallbackValue="Не указано"/>
                             <Binding Path="Address.Building" FallbackValue="Не указано"/>
                             <Binding Path="Address.Flat" FallbackValue="Не указано"/>

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\ST\Castle_\Castle_IS\App.xaml
-13-865980315
+14-1532775735
 22035508349
-45-461184604
+461490533972
 138-1609588384
-Administrator\AdWindow.xaml;Administrator\AdWorkers.xaml;Administrator\ULogs.xaml;ForEveryone\AddProd.xaml;MainWindow.xaml;Manager\AddWorker.xaml;Manager\ManagerrWindow.xaml;Manager\UWorkers.xaml;UserFolder\ChangePasswordWindow.xaml;UserFolder\SupplierDetails.xaml;UserFolder\UProfile.xaml;UserFolder\UserWindow.xaml;UserFolder\USuplies.xaml;
+Administrator\AdWindow.xaml;Administrator\AdWorkers.xaml;Administrator\ULogs.xaml;ForEveryone\AddProd.xaml;MainWindow.xaml;Manager\AddWorker.xaml;Manager\ManagerrWindow.xaml;Manager\UWorkers.xaml;UserFolder\AddressSelector.xaml;UserFolder\ChangePasswordWindow.xaml;UserFolder\SupplierDetails.xaml;UserFolder\UProfile.xaml;UserFolder\UserWindow.xaml;UserFolder\USuplies.xaml;
 
-True
+False
 
