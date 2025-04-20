@@ -53,14 +53,33 @@ namespace Castle.Administrator
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            try
+            using (var context = new Amo_CastleEntities1())
             {
-                _context.SaveChanges();
-                MessageBox.Show("Изменения сохранены!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка сохранения изменений: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                try
+                {
+                    foreach (var log in DGLogs.Items.Cast<Logs>())
+                    {
+                        var entry = context.Logs.Find(log.Id);
+                        if (entry != null)
+                        {
+                            entry.Details = log.Details;
+                        }
+                    }
+                    context.SaveChanges();
+                    MessageBox.Show("Изменения сохранены!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    var errorMessages = dbEx.EntityValidationErrors
+                        .SelectMany(x => x.ValidationErrors)
+                        .Select(x => $"{x.PropertyName}: {x.ErrorMessage}");
+                    var fullErrorMessage = string.Join("\n", errorMessages);
+                    MessageBox.Show($"Ошибка валидации:\n{fullErrorMessage}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка сохранения изменений: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }

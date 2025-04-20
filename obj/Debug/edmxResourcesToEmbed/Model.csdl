@@ -49,7 +49,7 @@
     <Property Name="Action" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="Details" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="User" Relationship="Self.FK_Logs_Users" FromRole="Logs" ToRole="User" />
   </EntityType>
   <EntityType Name="Orders">

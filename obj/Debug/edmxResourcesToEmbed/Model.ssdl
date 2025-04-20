@@ -42,7 +42,7 @@
     <Property Name="Action" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Details" Type="nchar" MaxLength="100" />
+    <Property Name="Details" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Orders">
     <Key>
