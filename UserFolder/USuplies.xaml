@@ -266,6 +266,8 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <!-- Добавлена колонка для кнопки "Экспорт в Excel" -->
                         </Grid.ColumnDefinitions>
                         <!-- Управление категориями -->
                         <TextBox x:Name="CategoryNameTextBox" Grid.Row="0" Grid.Column="0" Margin="0,0,15,0"
@@ -301,7 +303,7 @@
                             </Button.ContentTemplate>
                         </Button>
                         <!-- Управление поставщиками -->
-                        <Grid Grid.Row="1" Grid.ColumnSpan="6">
+                        <Grid Grid.Row="1" Grid.ColumnSpan="7">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -312,6 +314,8 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <!-- Добавлена колонка для кнопки "Экспорт в Excel" -->
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="SupplierNameTextBox" Grid.Column="0" Margin="0,10,15,0"
                                      materialDesign:HintAssist.Hint="Название поставщика"

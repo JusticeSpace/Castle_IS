@@ -3,15 +3,35 @@
   "WorkspaceRootPath": "C:\\ST\\Castle_\\Castle_IS\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\userfolder\\usuplies.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:userfolder\\usuplies.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\userfolder\\usuplies.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:userfolder\\usuplies.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|c:\\st\\castle_\\castle_is\\logs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:logs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|c:\\st\\castle_\\castle_is\\model.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
+      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|c:\\st\\castle_\\castle_is\\manager\\uworkers.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:manager\\uworkers.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\manager\\uworkers.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:manager\\uworkers.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\model.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
       "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:model.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|c:\\st\\castle_\\castle_is\\administrator\\ulogs.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\administrator\\ulogs.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:administrator\\ulogs.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -19,7 +39,7 @@
       "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:administrator\\ulogs.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|c:\\st\\castle_\\castle_is\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -37,18 +57,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\userfolder\\supplierdetails.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:userfolder\\supplierdetails.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\userfolder\\usuplies.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:userfolder\\usuplies.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\userfolder\\usuplies.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:userfolder\\usuplies.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\userfolder\\supplierdetails.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -97,10 +105,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\userfolder\\uprofile.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:userfolder\\uprofile.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|C:\\ST\\Castle_\\Castle_IS\\manager\\uworkers.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D88D9F43-07C9-4F5E-9F98-C6B6D6D65D81}|Castle.csproj|solutionrelative:manager\\uworkers.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -110,74 +114,36 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Model.edmx [Diagram1]",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Model.edmx",
-              "RelativeDocumentMoniker": "Model.edmx",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Model.edmx [Diagram1]",
-              "RelativeToolTip": "Model.edmx [Diagram1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001116|",
-              "WhenOpened": "2025-04-20T21:49:42.307Z",
-              "EditorCaption": " [Diagram1]"
+              "DocumentIndex": 3,
+              "Title": "UWorkers.xaml",
+              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Manager\\UWorkers.xaml",
+              "RelativeDocumentMoniker": "Manager\\UWorkers.xaml",
+              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Manager\\UWorkers.xaml",
+              "RelativeToolTip": "Manager\\UWorkers.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-21T01:59:41.661Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Logs.cs",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Logs.cs",
               "RelativeDocumentMoniker": "Logs.cs",
               "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Logs.cs",
               "RelativeToolTip": "Logs.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-20T21:42:24.667Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\User.cs",
-              "RelativeDocumentMoniker": "User.cs",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\User.cs",
-              "RelativeToolTip": "User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T21:35:19.595Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ULogs.xaml",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Administrator\\ULogs.xaml",
-              "RelativeDocumentMoniker": "Administrator\\ULogs.xaml",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Administrator\\ULogs.xaml",
-              "RelativeToolTip": "Administrator\\ULogs.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-19T21:58:44.934Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ULogs.xaml.cs",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Administrator\\ULogs.xaml.cs",
-              "RelativeDocumentMoniker": "Administrator\\ULogs.xaml.cs",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Administrator\\ULogs.xaml.cs",
-              "RelativeToolTip": "Administrator\\ULogs.xaml.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAYwD4AAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T21:34:20.46Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "AdWindow.xaml.cs",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Administrator\\AdWindow.xaml.cs",
               "RelativeDocumentMoniker": "Administrator\\AdWindow.xaml.cs",
@@ -185,24 +151,24 @@
               "RelativeToolTip": "Administrator\\AdWindow.xaml.cs",
               "ViewState": "AgIAADIAAAAAAAAAAAAIwF4AAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T22:15:59.872Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T22:15:59.872Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 0,
               "Title": "USuplies.xaml.cs",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\USuplies.xaml.cs",
               "RelativeDocumentMoniker": "UserFolder\\USuplies.xaml.cs",
               "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\USuplies.xaml.cs",
               "RelativeToolTip": "UserFolder\\USuplies.xaml.cs",
-              "ViewState": "AgIAAGsBAAAAAAAAAAAcwIYBAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAB0CAAAAAAAAAADwvy8CAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T22:27:52.419Z"
+              "WhenOpened": "2025-04-19T22:27:52.419Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "AddWorker.xaml",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Manager\\AddWorker.xaml",
               "RelativeDocumentMoniker": "Manager\\AddWorker.xaml",
@@ -213,7 +179,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "UProfile.xaml",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\UProfile.xaml",
               "RelativeDocumentMoniker": "UserFolder\\UProfile.xaml",
@@ -224,7 +190,90 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 5,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-20T19:02:02.505Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "USuplies.xaml",
+              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\USuplies.xaml",
+              "RelativeDocumentMoniker": "UserFolder\\USuplies.xaml",
+              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\USuplies.xaml",
+              "RelativeToolTip": "UserFolder\\USuplies.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-19T22:26:41.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UWorkers.xaml.cs",
+              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Manager\\UWorkers.xaml.cs",
+              "RelativeDocumentMoniker": "Manager\\UWorkers.xaml.cs",
+              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Manager\\UWorkers.xaml.cs",
+              "RelativeToolTip": "Manager\\UWorkers.xaml.cs",
+              "ViewState": "AgIAAOoAAAAAAAAAAAAuwA8BAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T21:56:26.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ULogs.xaml.cs",
+              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Administrator\\ULogs.xaml.cs",
+              "RelativeDocumentMoniker": "Administrator\\ULogs.xaml.cs",
+              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Administrator\\ULogs.xaml.cs",
+              "RelativeToolTip": "Administrator\\ULogs.xaml.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAYwD4AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T21:34:20.46Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ULogs.xaml",
+              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Administrator\\ULogs.xaml",
+              "RelativeDocumentMoniker": "Administrator\\ULogs.xaml",
+              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Administrator\\ULogs.xaml",
+              "RelativeToolTip": "Administrator\\ULogs.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-19T21:58:44.934Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\User.cs",
+              "RelativeDocumentMoniker": "User.cs",
+              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\User.cs",
+              "RelativeToolTip": "User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T21:35:19.595Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Model.edmx [Diagram1]",
+              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Model.edmx",
+              "RelativeDocumentMoniker": "Model.edmx",
+              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Model.edmx [Diagram1]",
+              "RelativeToolTip": "Model.edmx [Diagram1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001116|",
+              "WhenOpened": "2025-04-20T21:49:42.307Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
               "Title": "NullToVisibilityConverter.cs",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\SomeCode\\NullToVisibilityConverter.cs",
               "RelativeDocumentMoniker": "SomeCode\\NullToVisibilityConverter.cs",
@@ -236,7 +285,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "ChangePasswordWindow.xaml",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\ChangePasswordWindow.xaml",
               "RelativeDocumentMoniker": "UserFolder\\ChangePasswordWindow.xaml",
@@ -247,19 +296,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "AdWorkers.xaml",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Administrator\\AdWorkers.xaml",
               "RelativeDocumentMoniker": "Administrator\\AdWorkers.xaml",
               "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Administrator\\AdWorkers.xaml",
               "RelativeToolTip": "Administrator\\AdWorkers.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-19T22:14:41.582Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T22:14:41.582Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "SupplierDetails.xaml.cs",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\SupplierDetails.xaml.cs",
               "RelativeDocumentMoniker": "UserFolder\\SupplierDetails.xaml.cs",
@@ -271,7 +319,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "ManagerrWindow.xaml",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Manager\\ManagerrWindow.xaml",
               "RelativeDocumentMoniker": "Manager\\ManagerrWindow.xaml",
@@ -282,29 +330,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\MainWindow.xaml",
-              "RelativeToolTip": "MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-20T19:02:02.505Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "USuplies.xaml",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\USuplies.xaml",
-              "RelativeDocumentMoniker": "UserFolder\\USuplies.xaml",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\USuplies.xaml",
-              "RelativeToolTip": "UserFolder\\USuplies.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-19T22:26:41.337Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "AddProd.xaml",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\ForEveryone\\AddProd.xaml",
               "RelativeDocumentMoniker": "ForEveryone\\AddProd.xaml",
@@ -315,7 +341,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "UserWindow.xaml",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\UserWindow.xaml",
               "RelativeDocumentMoniker": "UserFolder\\UserWindow.xaml",
@@ -326,7 +352,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "ChangePasswordWindow.xaml.cs",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\ChangePasswordWindow.xaml.cs",
               "RelativeDocumentMoniker": "UserFolder\\ChangePasswordWindow.xaml.cs",
@@ -338,19 +364,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "AdWindow.xaml",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Administrator\\AdWindow.xaml",
               "RelativeDocumentMoniker": "Administrator\\AdWindow.xaml",
               "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Administrator\\AdWindow.xaml",
               "RelativeToolTip": "Administrator\\AdWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-04-19T22:15:55.688Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-19T22:15:55.688Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "SupplierDetails.xaml",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\SupplierDetails.xaml",
               "RelativeDocumentMoniker": "UserFolder\\SupplierDetails.xaml",
@@ -361,7 +386,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "AddressSelector.xaml",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\AddressSelector.xaml",
               "RelativeDocumentMoniker": "UserFolder\\AddressSelector.xaml",
@@ -372,7 +397,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "Logger.cs",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\Logger.cs",
               "RelativeDocumentMoniker": "UserFolder\\Logger.cs",
@@ -384,7 +409,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 25,
               "Title": "UProfile.xaml.cs",
               "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\UserFolder\\UProfile.xaml.cs",
               "RelativeDocumentMoniker": "UserFolder\\UProfile.xaml.cs",
@@ -393,18 +418,6 @@
               "ViewState": "AgIAAAQAAAAAAAAAAAAAwBYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-19T21:55:54.607Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "UWorkers.xaml.cs",
-              "DocumentMoniker": "C:\\ST\\Castle_\\Castle_IS\\Manager\\UWorkers.xaml.cs",
-              "RelativeDocumentMoniker": "Manager\\UWorkers.xaml.cs",
-              "ToolTip": "C:\\ST\\Castle_\\Castle_IS\\Manager\\UWorkers.xaml.cs",
-              "RelativeToolTip": "Manager\\UWorkers.xaml.cs",
-              "ViewState": "AgIAAOYAAAAAAAAAAAAAwA8BAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T21:56:26.349Z"
             }
           ]
         }

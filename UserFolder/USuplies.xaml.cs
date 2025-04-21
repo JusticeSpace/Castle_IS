@@ -552,24 +552,34 @@ namespace Castle.UserFolder
             using (var workbook = new XLWorkbook())
             {
                 var worksheet = workbook.Worksheets.Add("Товары");
-                var products = _context.Product.ToList();
+                var products = _context.Product
+                    .Include(p => p.Categories)
+                    .Include(p => p.Suppliers)
+                    .ToList(); // Загружаем связанные данные
 
+                // Заголовки столбцов
                 worksheet.Cell(1, 1).Value = "ID";
                 worksheet.Cell(1, 2).Value = "Название";
                 worksheet.Cell(1, 3).Value = "Цена";
-                worksheet.Cell(1, 4).Value = "Категория";
-                worksheet.Cell(1, 5).Value = "Поставщик";
-                worksheet.Cell(1, 6).Value = "Фото";
+                worksheet.Cell(1, 4).Value = "Количество";
+                worksheet.Cell(1, 5).Value = "Категория";
+                worksheet.Cell(1, 6).Value = "Поставщик";
+                worksheet.Cell(1, 7).Value = "Комментарий";
 
+                // Заполняем данные
                 for (int i = 0; i < products.Count; i++)
                 {
                     worksheet.Cell(i + 2, 1).Value = products[i].ProductID;
                     worksheet.Cell(i + 2, 2).Value = products[i].ProductName;
                     worksheet.Cell(i + 2, 3).Value = products[i].Price;
-                    worksheet.Cell(i + 2, 4).Value = products[i].CategoryID;
-                    worksheet.Cell(i + 2, 5).Value = products[i].SuppliersID;
-                    worksheet.Cell(i + 2, 6).Value = products[i].PhotoID;
+                    worksheet.Cell(i + 2, 4).Value = products[i].Quantity;
+                    worksheet.Cell(i + 2, 5).Value = products[i].Categories?.CategoryName ?? "Не указана";
+                    worksheet.Cell(i + 2, 6).Value = products[i].Suppliers?.SupplierName ?? "Без поставщика";
+                    worksheet.Cell(i + 2, 7).Value = products[i].Comment ?? "Нет комментария";
                 }
+
+                // Настраиваем ширину столбцов для удобства чтения
+                worksheet.Columns().AdjustToContents();
 
                 workbook.SaveAs(filePath);
             }
