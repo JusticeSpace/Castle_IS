@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Добавить товар" Height="600" Width="600">
+        Title="Добавить товар" Height="759" Width="600">
     <Grid>
         <!-- Градиентный фон -->
         <Grid.Background>

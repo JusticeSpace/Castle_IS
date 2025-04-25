@@ -118,7 +118,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Address.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Administrator\AdWindow.xaml.cs">
       <DependentUpon>AdWindow.xaml</DependentUpon>
@@ -130,20 +130,20 @@
       <DependentUpon>ULogs.xaml</DependentUpon>
     </Compile>
     <Compile Include="Categories.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="City.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Country.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataFolder\ContextClass.cs" />
     <Compile Include="ForEveryone\AddProd.xaml.cs">
       <DependentUpon>AddProd.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logs.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Manager\AddWorker.xaml.cs">
       <DependentUpon>AddWorker.xaml</DependentUpon>
@@ -154,32 +154,29 @@
     <Compile Include="Manager\UWorkers.xaml.cs">
       <DependentUpon>UWorkers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model.Context.cs">
+    <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.cs">
+    <Compile Include="Model1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.Designer.cs">
+    <Compile Include="Model1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Orders.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Photos.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Roles.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="SomeCode\ClassMB.cs" />
     <Compile Include="SomeCode\Converter.cs" />
@@ -188,22 +185,22 @@
     <Compile Include="SomeCode\PriceConverter.cs" />
     <Compile Include="SomeCode\Suplier.cs" />
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Street.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Suppliers.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="UserFolder\AddressSelector.xaml.cs">
       <DependentUpon>AddressSelector.xaml</DependentUpon>
@@ -309,12 +306,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model.edmx">
+    <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
+    <None Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <Resource Include="Fonts\Roboto-Italic-VariableFont_wdth,wght.ttf" />
@@ -340,15 +337,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model.Context.tt">
+    <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model.tt">
+    <Content Include="Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

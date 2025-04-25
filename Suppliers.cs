@@ -17,7 +17,6 @@ namespace Castle
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Suppliers()
         {
-            this.Orders = new HashSet<Orders>();
             this.Product = new HashSet<Product>();
         }
     
@@ -29,8 +28,6 @@ namespace Castle
         public Nullable<int> AddressID { get; set; }
     
         public virtual Address Address { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
     }
